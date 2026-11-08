@@ -1,0 +1,17 @@
+Cyber 72 character assets
+
+The heads, hands and connected lower-body clothing surface in anatomy.js were extracted, fitted and repacked from the MakeHuman hm08 base mesh and its clothing helper. The lower-body surface uses the helper-tights topology, reshaped as trousers to fit Cyber 72's existing skeleton. The base.obj asset identifies its September 2020 release under CC0 1.0 Universal and credits Data Collection AB, Joel Palmius, and Jonas Hauquier.
+
+Base asset
+https://github.com/makehumancommunity/makehuman/blob/master/makehuman/data/3dobjs/base.obj
+
+Project asset license
+https://github.com/makehumancommunity/makehuman/blob/master/LICENSE.md
+
+CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Clothing design, fabric patterns, tunics, lungis, scarves, the schoolbag, accessories, grooming, the skeleton and street-activity animation were made for Cyber 72. Animation sources are listed separately in MOTION-CREDITS.txt.
+
+The face texture and sampled skin colours are adapted from MargaretToigo's "toigo_light_skin_male_bronze" in the MakeHuman Community Skins 02 CC0 collection. Only the head's mapped texture area is included in face.webp. The game adjusts its colour for each character.
+https://static.makehumancommunity.org/assets/assetpacks/skins02.html

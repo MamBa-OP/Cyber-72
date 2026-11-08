@@ -1,0 +1,21 @@
+Cyber 72 locomotion animation
+
+Original: Quaternius Universal Animation Library [Standard]
+Animation: Quaternius and Gonzalo Furnier
+License: CC0 1.0 Universal (see MOTION-LICENSE.txt)
+Author: https://quaternius.com/packs/universalanimationlibrary.html
+Original download: https://quaternius.itch.io/universal-animation-library
+Distribution used: https://github.com/J-Ponzo/gltf-universal-animation-library
+Clips: Walk_Loop, Sprint_Loop
+
+Adaptation: retargeted to Cyber 72's 16-joint character rig, resampled to 60 Hz,
+encoded as local joint rotations and pelvis motion. All data is embedded for offline play.
+No runtime asset requests, inverse-kinematic foot locks or generated stride paths.
+
+Source SHA-256
+glTF: 0ff075c7ad6855c5c2c37a171592ee8f0d6ab2f58259e2be77a9b63dd8027765
+bin: 6e65377d81558333c4093dbb144a48fd19019343d82b1a3a7992a98ec0e0543c
+
+Idle replacement: Relaxed_Standing_Loop, authored for Cyber 72.
+A neutral standing pose with fixed soles, softened knees, relaxed arms,
+subtle breathing and slow weight transfer. Walking and running clips are unchanged.

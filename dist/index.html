@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071b22">
+  <meta name="description" content="Meet Rakib on Islampur Road in Old Dhaka in Cyber 72, a Bangla and English cyber safety adventure for teens in Bangladesh.">
+  <title>Cyber 72 | Welcome</title>
+  <link rel="icon" href="./assets/shield.svg" type="image/svg+xml">
+  <link rel="preload" as="image" href="./assets/dhaka-dusk.webp">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./city/hud.css">
+  <link rel="stylesheet" href="./presentation.css">
+  <script src="./city/vendor/three.min.js" defer></script>
+  <script src="./city/textures/atlas-data.js" defer></script>
+  <script src="./city/atlases.js" defer></script>
+  <script src="./city/batch.js" defer></script>
+  <script src="./city/people/anatomy.js" defer></script>
+  <script src="./city/people/motion-data.js" defer></script>
+  <script src="./city/gait.js" defer></script>
+  <script src="./city/people.js" defer></script>
+  <script src="./city/district.js" defer></script>
+  <script src="./city/vehicles.js" defer></script>
+  <script src="./city/streets.js" defer></script>
+  <script src="./city/terrain.js" defer></script>
+  <script src="./city/street-art.js" defer></script>
+  <script src="./city/life.js" defer></script>
+  <script src="./city/ambience.js" defer></script>
+  <script src="./city/play.js" defer></script>
+  <script src="./presentation.js" defer></script>
+  <script src="./game.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-t="skip">Skip to game</a>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M4 2h4v2h4v3h4v3h4v4h-4v3h-4v3H8v2H4z"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M9 1h6v3h3V3h3v4h-1v2h3v6h-3v2h1v4h-3v-1h-3v3H9v-3H6v1H3v-4h1v-2H1V9h3V7H3V3h3v1h3z M9 7v2H7v6h2v2h6v-2h2V9h-2V7z"/></symbol>
+      <symbol id="i-sound" viewBox="0 0 24 24"><path fill="currentColor" d="M2 9h4V7h3V5h3v14H9v-2H6v-2H2z M15 8h2v2h2v4h-2v2h-2v-3h2v-2h-2z M18 4h2v2h2v3h1v6h-1v3h-2v2h-2v-3h2v-3h1v-4h-1V7h-2z"/></symbol>
+      <symbol id="i-mute" viewBox="0 0 24 24"><path fill="currentColor" d="M2 9h4V7h3V5h3v14H9v-2H6v-2H2z M15 8h2v2h2V8h2v2h-2v3h2v2h-2v-2h-2v2h-2v-2h2v-3h-2z"/></symbol>
+      <symbol id="i-expand" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" d="M3 9V3h6m6 0h6v6m0 6v6h-6m-6 0H3v-6"/></symbol>
+      <symbol id="i-contract" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" d="M9 3v6H3m12-6v6h6m0 6h-6v6m-6 0v-6H3"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M7 2h10v2h3v3h1v7h-2v3h-3v3h-2v3h-4v-3H8v-3H5v-3H3V7h1V4h3z M9 7v6h6V7z"/></symbol>
+      <symbol id="i-id" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M2 4h20v16H2z"/><path fill="currentColor" d="M6 7h5v5H6z M5 13h7v3H5z M14 8h5v2h-5z M14 12h5v2h-5z"/></symbol>
+      <symbol id="i-back" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M21 12H4m6-6-6 6 6 6"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" d="m3 12 6 6L21 5"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="m5 5 14 14M19 5 5 19"/></symbol>
+      <symbol id="i-flag" viewBox="0 0 24 16"><path fill="#267865" d="M0 0h24v16H0z"/><circle cx="10.8" cy="8" r="4.5" fill="#ee5359"/></symbol>
+    </defs>
+  </svg>
+  <main class="main" id="main-content" tabindex="-1">
+    <div class="menu-world" aria-hidden="true">
+      <img class="scene" src="./assets/dhaka-dusk.webp" fetchpriority="high" alt="" width="1672" height="941">
+      <div class="menu-light"></div><canvas id="menu-atmosphere"></canvas><div class="menu-grain"></div>
+    </div>
+    <section id="menu-view" aria-labelledby="game-title">
+      <div class="stage">
+        <div class="scene-controls">
+          <span class="stage-tag micro"><i class="status-dot"></i><span data-t="welcomeBadge">WELCOME</span></span>
+          <div class="corner-controls">
+            <button type="button" id="music-quick" class="small-square sound-control" aria-label="Turn music off" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-sound"/></svg><span id="sound-prompt" data-t="startMusic" hidden>Tap for music</span></button>
+            <button type="button" id="fullscreen-toggle" class="small-square" aria-label="Enter fullscreen" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#i-expand"/></svg></button>
+          </div>
+        </div>
+        <div class="hero-content">
+          <div class="eyebrow hero-eyebrow"><span class="dash" aria-hidden="true"></span><span data-t="adventure">A BANGLADESH CYBER ADVENTURE</span></div>
+          <h1 id="game-title" class="hero-title" aria-label="Cyber 72">
+            <span class="title-cyber" aria-hidden="true">CYBER</span>
+            <span class="title-number" aria-hidden="true">72<span class="title-signal"><i></i><i></i><i></i></span></span>
+          </h1>
+          <p class="hero-line" data-t="tagline">Spot the scam. Protect your para.</p>
+          <div class="hero-actions">
+            <button class="button primary" id="start-game" type="button" aria-labelledby="start-label"><span class="action-symbol"><svg class="icon play" aria-hidden="true"><use href="#i-play"/></svg></span><span class="action-copy"><strong data-t="start" id="start-label">Start game</strong><small data-t="startHint">OLD DHAKA / FREE ROAM</small></span><span class="action-arrow" aria-hidden="true">↗</span></button>
+            <a class="button secondary" id="open-settings" href="#settings"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg><span data-t="settings">Settings</span><span class="settings-arrow" aria-hidden="true">→</span></a>
+          </div>
+          <div class="key-hints"><span><kbd>Enter</kbd> <span data-t="startKey">Start</span></span><span><kbd>S</kbd> <span data-t="settings">Settings</span></span><span><kbd>M</kbd> <span data-t="musicKey">Music</span></span></div>
+        </div>
+        <div class="scene-foot">
+          <div class="edition"><svg class="flag" aria-hidden="true"><use href="#i-flag"/></svg><span data-t="edition">BANGLADESH EDITION</span><span class="foot-separator"></span><span>v0.5.0</span></div>
+          <div class="location-chip"><svg class="icon"><use href="#i-pin"/></svg><span><span class="micro" data-t="locationLabel">LOCATION 01</span><strong data-t="location">Islampur, Old Dhaka</strong></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="settings-view" hidden aria-labelledby="settings-title">
+      <a class="back-link" href="#menu"><svg class="icon"><use href="#i-back"/></svg><span data-t="mainMenu">Main menu</span></a>
+      <div class="settings-heading">
+        <div class="eyebrow"><span class="dash"></span><span data-t="console">PLAYER CONSOLE</span></div>
+        <h1 id="settings-title" tabindex="-1" data-t="settings">Settings</h1>
+      </div>
+      <div class="settings-grid">
+        <aside class="dossier panel">
+          <div class="dossier-art"><span class="stage-tag micro"><i class="status-dot"></i><span data-t="playerOne">PLAYER 01</span></span></div>
+          <div class="dossier-inner">
+            <div class="portrait-tile big"><img src="./assets/rakib.svg" width="80" height="80" alt=""></div>
+            <h2 data-player>Rakib</h2>
+            <div class="rank"><span class="level" data-t="level">LV. 01</span><span data-t="rookie">Cyber Rookie</span></div>
+            <div class="home-base"><svg class="icon"><use href="#i-pin"/></svg><span data-t="location">Islampur, Old Dhaka</span></div>
+          </div>
+        </aside>
+        <form class="settings-form panel" id="settings-form">
+          <h2 class="eyebrow panel-label"><svg class="icon"><use href="#i-id"/></svg><span data-t="identity">PLAYER IDENTITY</span></h2>
+          <label class="field-label" for="player-name" data-t="playerName">Character name</label>
+          <input type="text" id="player-name" name="player-name" value="Rakib" maxlength="120" autocomplete="off" spellcheck="false" required aria-describedby="name-help">
+          <p class="field-help" id="name-help" data-t="nameHelp">Use up to 24 characters. Bangla names are welcome.</p>
+          <div class="setting-row lang-row">
+            <span class="field-label" id="language-label" data-t="language">Language</span>
+            <div class="segmented" role="group" aria-labelledby="language-label"><button type="button" data-language="en" lang="en" aria-pressed="true">English</button><button type="button" data-language="bn" lang="bn" aria-pressed="false">বাংলা</button></div>
+          </div>
+          <hr>
+          <h2 class="eyebrow panel-label"><svg class="icon"><use href="#i-sound"/></svg><span data-t="audio">AUDIO</span></h2>
+          <div class="setting-row">
+            <div><span class="field-label" id="music-label" data-t="music">Background music</span><p class="field-help" data-t="track">Riverlight · title theme</p></div>
+            <button type="button" class="switch" id="music-switch" role="switch" aria-checked="true" aria-labelledby="music-label"><span data-switch-text>On</span><i aria-hidden="true"></i></button>
+          </div>
+          <div class="volume-head"><label class="field-label" for="music-volume" data-t="musicVolume">Music volume</label><output id="music-readout" for="music-volume">20%</output></div>
+          <input class="volume-slider" id="music-volume" name="musicVolume" type="range" min="0" max="100" value="20">
+          <div class="setting-row effects-row">
+            <span class="field-label" id="effects-label" data-t="effects">Menu sound effects</span>
+            <button type="button" class="switch" id="effects-switch" role="switch" aria-checked="true" aria-labelledby="effects-label"><span data-switch-text>On</span><i aria-hidden="true"></i></button>
+          </div>
+          <div class="volume-head"><label class="field-label" for="effects-volume" data-t="effectsVolume">Menu click volume</label><output id="effects-readout" for="effects-volume">50%</output></div>
+          <input class="volume-slider" id="effects-volume" name="effectsVolume" type="range" min="0" max="100" value="50">
+          <div class="setting-row effects-row">
+            <span class="field-label" id="ambience-label" data-t="ambience">Street ambience</span>
+            <button type="button" class="switch" id="ambience-switch" role="switch" aria-checked="true" aria-labelledby="ambience-label"><span data-switch-text>On</span><i aria-hidden="true"></i></button>
+          </div>
+          <div class="volume-head"><label class="field-label" for="ambience-volume" data-t="ambienceVolume">Street volume</label><output id="ambience-readout" for="ambience-volume">35%</output></div>
+          <input class="volume-slider" id="ambience-volume" name="ambienceVolume" type="range" min="0" max="100" value="35">
+          <div class="form-footer"><span class="save-note"><i class="status-dot"></i><span id="save-status" data-t="autoSave">Saves on this device</span></span><button type="submit" class="button primary done-button"><svg class="icon"><use href="#i-check"/></svg><span data-t="done">Done</span></button></div>
+        </form>
+      </div>
+      <div class="settings-keys key-hints"><span><kbd>Esc</kbd> <span data-t="mainMenu">Main menu</span></span></div>
+    </section>
+    <section id="city-view" hidden aria-label="Old Dhaka">
+      <canvas id="city-screen" tabindex="0" aria-label="Walk through Old Dhaka" aria-describedby="city-help"></canvas>
+      <div id="city-hud" hidden>
+        <div class="city-locator"><span class="district-mark" aria-hidden="true">৭২</span><div><small data-city="chapter">DHAKA / FREE ROAM</small><strong id="street-name">Islampur Road</strong></div></div>
+        <div class="city-tools"><button id="show-map" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 5 6-2 8 3 6-2v15l-6 2-8-3-6 2zm6-2v15m8-12v15"/></svg><span data-city="map">Map</span></button><button id="show-pause" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4v16m8-16v16" stroke-width="3"/></svg><span data-city="pause">Pause</span></button></div>
+        <button type="button" id="radar" aria-label="Open district map"><canvas id="mini-map" width="208" height="208" aria-hidden="true"></canvas><b aria-hidden="true">N</b></button>
+        <div id="city-help"><span data-city="help">WASD or ↑↓←→ to walk · Shift to run · Space to jump · Drag to look</span></div>
+        <div class="touch-pad" id="walk-pad" aria-label="Movement joystick"><i></i></div>
+        <div class="touch-actions"><button id="touch-run" type="button" data-city="run" aria-pressed="false">Run</button><button id="touch-jump" type="button" data-city="jump">Jump</button></div>
+      </div>
+      <div class="city-veil" id="city-loading">
+        <div class="loading-scenery" aria-hidden="true"></div>
+        <div class="boarding">
+          <div class="boarding-copy">
+            <span class="travel-kicker"><i></i><span data-city="departure">CYBER 72 / YOUR NEXT STOP</span></span>
+            <span class="boarding-bn" lang="bn" aria-hidden="true">পুরান ঢাকা</span><h1 data-city="old">Old Dhaka</h1>
+            <p class="arrival-line" data-city="arrival">Islampur Road · Bangshal Market</p>
+            <div class="loading-readout"><small id="load-caption" role="status"></small><output id="load-percent" aria-hidden="true">0%</output></div>
+            <progress id="city-progress" max="100" value="0" aria-label="Loading the district"></progress>
+            <ol class="load-stages" aria-hidden="true"><li data-load-step="0"><i></i><span data-city="stepArt">Textures</span></li><li data-load-step="1"><i></i><span data-city="stepStreets">Streets</span></li><li data-load-step="2"><i></i><span data-city="stepPeople">Street life</span></li><li data-load-step="3"><i></i><span data-city="stepReady">Ready</span></li></ol>
+            <div class="loading-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 8 3v6c0 5-4 9-8 11C8 20 4 16 4 11V5z"/><path d="m8 11 3 3 5-6"/></svg><p id="load-tip">Your OTP is yours. Keep it to yourself.</p></div>
+            <button id="loading-back" type="button" class="city-secondary"><span aria-hidden="true">←</span> <span data-city="main">Main menu</span></button>
+          </div>
+          <div class="district-preview" aria-hidden="true">
+            <div class="map-halo"></div>
+            <div class="district-model">
+              <div class="district-base"></div>
+              <svg class="district-roads" viewBox="0 0 320 260"><path class="map-streets" d="M0 68H320M0 145H320M0 224H320M110 0V260M230 0V260"/><path class="map-route-under" d="M28 224H110V145H230V44H292"/><path id="loading-route" class="map-route" pathLength="100" d="M28 224H110V145H230V44H292"/><circle class="route-dot" id="loading-dot" cx="28" cy="224" r="5"/></svg>
+              <div class="map-building" style="--x:20px;--y:12px;--w:64px;--d:39px;--h:43px"><i></i><b></b><em></em></div>
+              <div class="map-building warm" style="--x:132px;--y:11px;--w:72px;--d:40px;--h:65px"><i></i><b></b><em></em></div>
+              <div class="map-building" style="--x:250px;--y:12px;--w:48px;--d:38px;--h:34px"><i></i><b></b><em></em></div>
+              <div class="map-building" style="--x:21px;--y:89px;--w:35px;--d:36px;--h:32px"><i></i><b></b><em></em></div>
+              <div class="map-building" style="--x:65px;--y:89px;--w:27px;--d:36px;--h:55px"><i></i><b></b><em></em></div>
+              <div class="map-building warm" style="--x:131px;--y:89px;--w:72px;--d:36px;--h:35px"><i></i><b></b><em></em></div>
+              <div class="map-building" style="--x:251px;--y:89px;--w:47px;--d:36px;--h:71px"><i></i><b></b><em></em></div>
+              <div class="map-building" style="--x:21px;--y:167px;--w:69px;--d:36px;--h:40px"><i></i><b></b><em></em></div>
+              <div class="map-building warm" style="--x:132px;--y:166px;--w:32px;--d:37px;--h:57px"><i></i><b></b><em></em></div>
+              <div class="map-building" style="--x:174px;--y:166px;--w:30px;--d:37px;--h:30px"><i></i><b></b><em></em></div>
+              <div class="map-building" style="--x:251px;--y:168px;--w:47px;--d:35px;--h:47px"><i></i><b></b><em></em></div>
+              <div class="map-flag"><span></span></div>
+              <span class="map-beacon"><i></i><b></b></span>
+            </div>
+            <div class="district-caption"><span class="district-caption-line"></span><span data-city="districtOne">DISTRICT 01</span><strong data-city="arrivalShort">ISLAMPUR, DHAKA</strong></div>
+          </div>
+        </div>
+        <div class="loading-footer"><span data-city="loadingWorld">A city full of stories. A little awareness goes a long way.</span><span class="loader-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+      </div>
+      <div class="city-veil" id="city-pause" hidden>
+        <section class="city-card pause-card" role="dialog" aria-modal="true" aria-labelledby="paused-title"><span class="travel-kicker"><i></i><span data-city="field">CYBER 72 / FIELD LOG 01</span></span>
+          <h2 id="paused-title" data-city="paused">Game paused</h2><p id="pause-location"></p>
+          <button class="city-resume" id="resume-play" type="button" data-city="resume">Resume walk</button><button class="city-secondary" id="restart-play" type="button" data-city="restart">Restart walk</button><button class="city-secondary" id="city-settings" type="button" data-city="settings">Settings</button>
+          <button class="city-secondary" id="return-menu" type="button" data-city="main">Main menu</button>
+          <p class="control-reference" data-city="allControls">Move with WASD or the arrow keys. Hold Shift to run, press Space to jump, drag to look, and scroll to zoom. M opens the map. Esc pauses.</p>
+        </section>
+      </div>
+      <div class="city-veil" id="city-map" hidden>
+        <section class="city-card map-card" role="dialog" aria-modal="true" aria-labelledby="map-title"><div class="map-head"><div><span class="travel-kicker"><i></i><span data-city="atlas">DHAKA / DISTRICT 01</span></span><h2 id="map-title" data-city="old">Old Dhaka</h2></div><button class="map-close" id="close-map" type="button" aria-label="Close map">×</button></div>
+          <div class="map-sheet"><canvas id="district-map" width="780" height="608" aria-label="District map and player location"></canvas></div>
+          <div class="map-key" id="map-key"></div><div class="map-key shop-list" id="shop-key"></div><p id="map-position"></p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <div id="status-message" class="sr-only" role="status"></div>
+  <audio id="soundtrack" src="./assets/riverlight.mp3" preload="none" loop></audio>
+</body>
+</html>
