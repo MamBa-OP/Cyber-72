@@ -425,27 +425,29 @@ window.C72Life = (() => {
     const stalls=[[-10.37,25.35],[20.4,3.8],[-49.4,-40.85],[85.7,-52.8]];
     const wisps=new Float32Array(stalls.length*9*3),steamGeo=new T.BufferGeometry();steamGeo.setAttribute("position",new T.BufferAttribute(wisps,3));
     const steam=new T.Points(steamGeo,new T.PointsMaterial({map:dustTexture,color:0xfff3d9,size:.17,transparent:true,opacity:.36,depthWrite:false}));steam.frustumCulled=false;scene.add(steam);
+    let quality='auto';
     function update(dt,time,player){
       drive(dt,time,player);
       const busArriving=drivers.some(d=>d.kind==="bus"&&d.z>65&&d.z<70&&d.x>39&&d.x<54);
       for(const p of people) {
-        const dist=Math.hypot(p.x-player.x,p.z-player.z),visible=dist<56;
+        const dist=Math.hypot(p.x-player.x,p.z-player.z),visible=dist<(quality==='low'?40:quality==='medium'?50:56);
         if(visible&&!p.kit)cast(p,dist);
         if(p.kit)p.kit.root.visible=visible;
-        const walking=p.route && step(p,dt,player);
+        const walking=!p.missionTarget && p.route && step(p,dt,player);
         const engaged=(time+p.offset)%12<9;
         let action=p.surprised>0?"argue":walking?"walk":p.shopFacing!==undefined&&p.goal===3?p.restAction:p.activity;
         if(p.busStop&&p.seed%3===0)action=busArriving?"hail":"idle";
         if(action==="argue"&&!engaged)action="talk";
         else if(!p.route&&!engaged&&["work","phone","photo","sweep","pay"].includes(action))action="idle";
+        if(p.missionTarget){action="talk";p.pace=0;}
         p.currentAction=action;
         if(!visible)continue;
         const root=p.kit.root;
         root.position.set(p.x,S.groundAt(p.x,p.z),p.z);root.rotation.y=p.yaw;
-        if(dist>34&&time<p.poseAt)continue;
+        if(dist>(quality==='low'?22:34)&&time<p.poseAt)continue;
         if(dist<32||dist>36)p.kit.setDetail(dist<32);
         p.kit.pose(action,time+p.offset,walking?p.pace:0);
-        p.poseAt=time+(dist>34?.04:0);
+        p.poseAt=time+(dist>(quality==='low'?22:34)?(quality==='low'?.1:.04):0);
       }
       pedestrianGrid.rebuild(people);
       specks.attributes.position.needsUpdate=true;
@@ -474,7 +476,7 @@ window.C72Life = (() => {
     }
     const playerNeighbours=[];
     const nearbyPeople=(x,z)=>pedestrianGrid.near(x,z,.7,playerNeighbours);
-    return {people,drivers,densityAreas,nearbyPeople,contact,shadow,update,reset};
+    return {people,drivers,densityAreas,nearbyPeople,contact,shadow,update,reset,quality(value){quality=value;}};
   }
   return {create,blocked};
 })();

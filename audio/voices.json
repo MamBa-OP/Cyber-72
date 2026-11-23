@@ -1,0 +1,26 @@
+{
+  "status": "original-recordings-restored",
+  "updated": "2026-11-23",
+  "paid_generation_allowed": false,
+  "runtime_network_required": false,
+  "npc_male": {
+    "provider": "Microsoft Edge speech",
+    "voice": "bn-BD-PradeepNeural",
+    "locale": "bn-BD",
+    "synthesis_rate_percent": {
+      "story": -5,
+      "reaction": -3
+    },
+    "source": "Original cached release MP3s, restored without re-synthesis"
+  },
+  "npc_female": {
+    "provider": "Microsoft Edge speech",
+    "voice": "bn-BD-NabanitaNeural",
+    "locale": "bn-BD",
+    "synthesis_rate_percent": {
+      "story": -5,
+      "reaction": -3
+    },
+    "source": "Original cached release MP3s, restored without re-synthesis"
+  }
+}

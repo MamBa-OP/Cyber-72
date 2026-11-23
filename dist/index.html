@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#071b22">
+  <meta name="theme-color" content="#202723">
   <meta name="description" content="Meet Rakib on Islampur Road in Old Dhaka in Cyber 72, a Bangla and English cyber safety adventure for teens in Bangladesh.">
   <title>Cyber 72 | Welcome</title>
   <link rel="icon" href="./assets/shield.svg" type="image/svg+xml">
@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./city/hud.css">
   <link rel="stylesheet" href="./presentation.css">
+  <link rel="stylesheet" href="./city/missions.css">
+  <link rel="stylesheet" href="./arcade.css"><link rel="stylesheet" href="./release.css"><link rel="stylesheet" href="./conversation.css">
+  <link rel="stylesheet" href="./guidebook.css">
   <script src="./city/vendor/three.min.js" defer></script>
   <script src="./city/textures/atlas-data.js" defer></script>
   <script src="./city/atlases.js" defer></script>
@@ -18,6 +21,8 @@
   <script src="./city/people/anatomy.js" defer></script>
   <script src="./city/people/motion-data.js" defer></script>
   <script src="./city/gait.js" defer></script>
+  <script src="./city/death-motion.js" defer></script>
+  <script src="./city/death-audio.js" defer></script>
   <script src="./city/people.js" defer></script>
   <script src="./city/district.js" defer></script>
   <script src="./city/vehicles.js" defer></script>
@@ -26,9 +31,17 @@
   <script src="./city/street-art.js" defer></script>
   <script src="./city/life.js" defer></script>
   <script src="./city/ambience.js" defer></script>
+  <script src="./city/missions-data.js" defer></script>
+  <script src="./city/choices.js" defer></script><script src="./city/dialogue-copy.js" defer></script><script src="./city/journey.js" defer></script><script src="./city/camera-rig.js" defer></script><script src="./city/portrait.js" defer></script>
+  <script src="./city/campaign.js" defer></script>
+  <script src="./city/voices-data.js" defer></script>
+  <script src="./city/reactions-data.js" defer></script>
+  <script src="./city/speech.js" defer></script>
+  <script src="./city/missions.js" defer></script>
   <script src="./city/play.js" defer></script>
   <script src="./presentation.js" defer></script>
   <script src="./game.js" defer></script>
+  <script src="./startup.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content" data-t="skip">Skip to game</a>
@@ -71,12 +84,13 @@
           <p class="hero-line" data-t="tagline">Spot the scam. Protect your para.</p>
           <div class="hero-actions">
             <button class="button primary" id="start-game" type="button" aria-labelledby="start-label"><span class="action-symbol"><svg class="icon play" aria-hidden="true"><use href="#i-play"/></svg></span><span class="action-copy"><strong data-t="start" id="start-label">Start game</strong><small data-t="startHint">OLD DHAKA / FREE ROAM</small></span><span class="action-arrow" aria-hidden="true">↗</span></button>
+            <button type="button" id="new-game" class="new-run" hidden data-t="newGame">New game</button>
             <a class="button secondary" id="open-settings" href="#settings"><svg class="icon" aria-hidden="true"><use href="#i-gear"/></svg><span data-t="settings">Settings</span><span class="settings-arrow" aria-hidden="true">→</span></a>
           </div>
           <div class="key-hints"><span><kbd>Enter</kbd> <span data-t="startKey">Start</span></span><span><kbd>S</kbd> <span data-t="settings">Settings</span></span><span><kbd>M</kbd> <span data-t="musicKey">Music</span></span></div>
         </div>
         <div class="scene-foot">
-          <div class="edition"><svg class="flag" aria-hidden="true"><use href="#i-flag"/></svg><span data-t="edition">BANGLADESH EDITION</span><span class="foot-separator"></span><span>v0.5.0</span></div>
+          <div class="edition"><svg class="flag" aria-hidden="true"><use href="#i-flag"/></svg><span data-t="edition">BANGLADESH EDITION</span><span class="foot-separator"></span><span>v1.2.0</span></div>
           <div class="location-chip"><svg class="icon"><use href="#i-pin"/></svg><span><span class="micro" data-t="locationLabel">LOCATION 01</span><strong data-t="location">Islampur, Old Dhaka</strong></span></div>
         </div>
       </div>
@@ -94,7 +108,7 @@
           <div class="dossier-inner">
             <div class="portrait-tile big"><img src="./assets/rakib.svg" width="80" height="80" alt=""></div>
             <h2 data-player>Rakib</h2>
-            <div class="rank"><span class="level" data-t="level">LV. 01</span><span data-t="rookie">Cyber Rookie</span></div>
+            <div class="rank"><span class="level" id="profile-level">LV. 01</span><span id="profile-rank">Cyber Rookie</span></div>
             <div class="home-base"><svg class="icon"><use href="#i-pin"/></svg><span data-t="location">Islampur, Old Dhaka</span></div>
           </div>
         </aside>
@@ -109,6 +123,7 @@
           </div>
           <hr>
           <h2 class="eyebrow panel-label"><svg class="icon"><use href="#i-sound"/></svg><span data-t="audio">AUDIO</span></h2>
+          <div class="setting-row"><span class="field-label" id="muted-label" data-t="muted">Mute all audio</span><button type="button" class="switch" id="muted-switch" role="switch" aria-checked="false" aria-labelledby="muted-label"><span data-switch-text>Off</span><i aria-hidden="true"></i></button></div>
           <div class="setting-row">
             <div><span class="field-label" id="music-label" data-t="music">Background music</span><p class="field-help" data-t="track">Riverlight · title theme</p></div>
             <button type="button" class="switch" id="music-switch" role="switch" aria-checked="true" aria-labelledby="music-label"><span data-switch-text>On</span><i aria-hidden="true"></i></button>
@@ -127,6 +142,14 @@
           </div>
           <div class="volume-head"><label class="field-label" for="ambience-volume" data-t="ambienceVolume">Street volume</label><output id="ambience-readout" for="ambience-volume">35%</output></div>
           <input class="volume-slider" id="ambience-volume" name="ambienceVolume" type="range" min="0" max="100" value="35">
+          <div class="setting-row"><span class="field-label" id="voice-label" data-t="voice">NPC dialogue</span><button type="button" class="switch" id="voice-switch" role="switch" aria-checked="true" aria-labelledby="voice-label"><span data-switch-text>On</span><i aria-hidden="true"></i></button></div>
+          <div class="volume-head"><label class="field-label" for="voice-volume-setting" data-t="voiceVolume">Dialogue volume</label><output id="voice-readout" for="voice-volume-setting">80%</output></div><input class="volume-slider" id="voice-volume-setting" name="voiceVolume" type="range" min="0" max="100" value="80">
+          <hr><h2 class="eyebrow panel-label" data-t="displayControls">DISPLAY & CONTROLS</h2>
+          <div class="setting-row"><label for="quality" class="field-label" data-t="quality">Graphics quality</label><select id="quality"><option value="auto" data-t="qualityAuto">Automatic</option><option value="low" data-t="qualityLow">Low</option><option value="medium" data-t="qualityMedium">Medium</option><option value="high" data-t="qualityHigh">High</option></select></div>
+          <div class="setting-row"><label for="key-layout" class="field-label" data-t="keyLayout">Movement keys</label><select id="key-layout"><option value="wasd">W A S D + ↑ ↓ ← →</option><option value="zqsd">Z Q S D + ↑ ↓ ← →</option></select></div>
+          <div class="volume-head"><label for="sensitivity" class="field-label" data-t="sensitivity">Camera sensitivity</label><output id="sensitivity-readout">100%</output></div><input class="volume-slider" id="sensitivity" name="sensitivity" type="range" min="25" max="200" value="100">
+          <div class="setting-row"><span class="field-label" id="invertY-label" data-t="invertY">Invert vertical look</span><button type="button" class="switch" id="invertY-switch" role="switch" aria-checked="false" aria-labelledby="invertY-label"><span data-switch-text>Off</span><i aria-hidden="true"></i></button></div>
+          <p class="field-help" data-t="cameraHelp">I J K L: look around · Home: centre camera · M: map · E: talk</p>
           <div class="form-footer"><span class="save-note"><i class="status-dot"></i><span id="save-status" data-t="autoSave">Saves on this device</span></span><button type="submit" class="button primary done-button"><svg class="icon"><use href="#i-check"/></svg><span data-t="done">Done</span></button></div>
         </form>
       </div>
@@ -135,7 +158,6 @@
     <section id="city-view" hidden aria-label="Old Dhaka">
       <canvas id="city-screen" tabindex="0" aria-label="Walk through Old Dhaka" aria-describedby="city-help"></canvas>
       <div id="city-hud" hidden>
-        <div class="city-locator"><span class="district-mark" aria-hidden="true">৭২</span><div><small data-city="chapter">DHAKA / FREE ROAM</small><strong id="street-name">Islampur Road</strong></div></div>
         <div class="city-tools"><button id="show-map" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 5 6-2 8 3 6-2v15l-6 2-8-3-6 2zm6-2v15m8-12v15"/></svg><span data-city="map">Map</span></button><button id="show-pause" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4v16m8-16v16" stroke-width="3"/></svg><span data-city="pause">Pause</span></button></div>
         <button type="button" id="radar" aria-label="Open district map"><canvas id="mini-map" width="208" height="208" aria-hidden="true"></canvas><b aria-hidden="true">N</b></button>
         <div id="city-help"><span data-city="help">WASD or ↑↓←→ to walk · Shift to run · Space to jump · Drag to look</span></div>
@@ -182,20 +204,21 @@
       <div class="city-veil" id="city-pause" hidden>
         <section class="city-card pause-card" role="dialog" aria-modal="true" aria-labelledby="paused-title"><span class="travel-kicker"><i></i><span data-city="field">CYBER 72 / FIELD LOG 01</span></span>
           <h2 id="paused-title" data-city="paused">Game paused</h2><p id="pause-location"></p>
-          <button class="city-resume" id="resume-play" type="button" data-city="resume">Resume walk</button><button class="city-secondary" id="restart-play" type="button" data-city="restart">Restart walk</button><button class="city-secondary" id="city-settings" type="button" data-city="settings">Settings</button>
+          <button class="city-resume" id="resume-play" type="button" data-city="resume">Resume walk</button><button class="city-secondary" id="restart-play" type="button" data-city="restart">Restart game</button><button class="city-secondary" id="open-guidebook" type="button" data-city="guidebook">Guidebook</button><button class="city-secondary" id="city-settings" type="button" data-city="settings">Settings</button>
           <button class="city-secondary" id="return-menu" type="button" data-city="main">Main menu</button>
           <p class="control-reference" data-city="allControls">Move with WASD or the arrow keys. Hold Shift to run, press Space to jump, drag to look, and scroll to zoom. M opens the map. Esc pauses.</p>
         </section>
       </div>
       <div class="city-veil" id="city-map" hidden>
         <section class="city-card map-card" role="dialog" aria-modal="true" aria-labelledby="map-title"><div class="map-head"><div><span class="travel-kicker"><i></i><span data-city="atlas">DHAKA / DISTRICT 01</span></span><h2 id="map-title" data-city="old">Old Dhaka</h2></div><button class="map-close" id="close-map" type="button" aria-label="Close map">×</button></div>
-          <div class="map-sheet"><canvas id="district-map" width="780" height="608" aria-label="District map and player location"></canvas></div>
-          <div class="map-key" id="map-key"></div><div class="map-key shop-list" id="shop-key"></div><p id="map-position"></p>
+          <div class="map-sheet"><canvas id="district-map" width="780" height="608" aria-label="District map, your position and active NPC"></canvas></div>
+          <p id="mission-map-note"></p>
         </section>
       </div>
     </section>
   </main>
   <div id="status-message" class="sr-only" role="status"></div>
+  <dialog id="new-run-dialog" aria-labelledby="new-run-title"><h2 id="new-run-title" data-t="newGame">New game</h2><p data-t="newGameWarning">Start at level 1 with 100 Health? This clears your current campaign. Your settings stay saved.</p><div><button id="cancel-new-run" class="mission-secondary" type="button" data-t="cancel">Keep my progress</button><button id="confirm-new-run" class="mission-primary" type="button" data-t="startFresh">Start a new run</button></div></dialog>
   <audio id="soundtrack" src="./assets/riverlight.mp3" preload="none" loop></audio>
 </body>
 </html>

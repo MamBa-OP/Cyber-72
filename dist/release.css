@@ -1,0 +1,18 @@
+/* Journal and settings surfaces use the existing Dhaka palette. */
+.startup-recovery{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;background:#1d3028;color:#fff2d4;text-align:center}.startup-recovery p{max-width:550px;line-height:1.7}.startup-recovery button{padding:14px 24px;background:#f4ad60;color:#243229;border:0;border-radius:10px;font:inherit;cursor:pointer}
+.mission-option:disabled{opacity:.45;cursor:not-allowed;transform:none}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #f7b35f;outline-offset:4px}
+.new-run{order:3;margin:0 auto;background:transparent;border:0;color:var(--muted,#c6c9af);font:inherit;font-size:12px;text-decoration:underline;cursor:pointer;padding:8px}
+.setting-row select{max-width:150px;padding:9px;border:1px solid #71826b;border-radius:9px;background:#263b31;color:#fff3db;font:inherit;font-size:13px}
+#new-run-dialog{max-width:430px;width:calc(100% - 36px);padding:28px;border:1px solid #8f9b7e;border-radius:22px;background:#24362e;color:#fff2d6;box-shadow:0 30px 100px #0009}
+#new-run-dialog::backdrop{background:#07140ec9;backdrop-filter:blur(8px)}
+#new-run-dialog p{line-height:1.6}#new-run-dialog button{margin:8px 8px 0 0;padding:12px 18px;border-radius:10px;border:1px solid #82917a;background:#324b3b;color:#fff2d6;font:inherit;cursor:pointer}
+#new-run-dialog #confirm-new-run{background:#f4ad60;color:#262d23}
+.journey-card{max-height:calc(100dvh - 32px);overflow:auto;width:min(740px,calc(100vw - 32px));padding:clamp(20px,4vw,38px);border:1px solid #8b9f7e;border-radius:24px;background:linear-gradient(145deg,#2b4135,#192d26);color:#fff3db;box-shadow:0 30px 100px #0009;animation:journey-enter .3s ease-out}
+.journey-kicker{font-size:11px;letter-spacing:.18em;color:#f4b869}.journey-card h2{font-size:clamp(24px,4vw,36px);margin:12px 0}.journey-card p{line-height:1.65;color:#dedcc5}
+#journey-content{display:grid;gap:12px;margin:24px 0}.journey-card article,.journey-card details{padding:14px 18px;border-radius:14px;border:1px solid #52644f;background:#ffffff05}.journey-card h3{font-size:16px;margin:0}.journey-card article p{margin:7px 0 0;font-size:14px}.journey-card summary{cursor:pointer;font-size:14px;padding:4px 0}.journal-note{font-size:12px}.journey-footer{display:flex;gap:12px;flex-wrap:wrap}.journey-footer button{flex:1;min-width:180px}
+.voice-controls input{min-height:30px}.voice-controls button{min-height:36px}
+@keyframes journey-enter{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media(max-height:500px) and (min-width:650px){.mission-dialog{max-height:calc(100dvh - 16px)}.speaker-portrait{height:120px!important;min-height:0!important}.conversation-main{padding:18px!important}.mission-story{padding:18px!important}.mission-dialog-head{padding:10px 18px!important}.conversation-copy h2{font-size:22px!important}.conversation-copy blockquote{font-size:14px!important}.journey-card{padding:18px}}
+@media(max-width:550px){.journey-card{border-radius:18px}}
+@media(prefers-reduced-motion:reduce){.journey-card{animation:none}}

@@ -3,31 +3,32 @@
 window.C72Game = (() => {
   const T=window.THREE,S=window.C72Streets,el=id=>document.getElementById(id),clamp=T.MathUtils.clamp;
   const words={
-    en:{chapter:"DHAKA / FREE ROAM",field:"CYBER 72 / FIELD LOG 01",old:"Old Dhaka",arrival:"Islampur Road · Bangshal Market",
+    en:{chapter:"DHAKA / CYBER MISSIONS",field:"CYBER 72 / FIELD LOG 01",old:"Old Dhaka",arrival:"Islampur Road · Bangshal Market",
       departure:"CYBER 72 / YOUR NEXT STOP",stepArt:"Textures",stepStreets:"Streets",stepPeople:"Street life",stepReady:"Ready",
       districtOne:"DISTRICT 01",arrivalShort:"ISLAMPUR, DHAKA",loadingWorld:"A city full of stories. A little awareness goes a long way.",
       tipCode:"Your OTP is yours. Keep it to yourself.",tipLink:"A familiar logo doesn’t make a link safe. Check before you tap.",tipMoney:"An unexpected payment request? Call the person and check first.",tipReady:"Stay curious. Take your time. Look out for your neighbours.",
-      map:"Map",pause:"Pause",paused:"Game paused",resume:"Resume walk",restart:"Restart walk",settings:"Settings",main:"Main menu",atlas:"DHAKA / DISTRICT 01",
-      run:"Run",jump:"Jump",help:"WASD or ↑↓←→ to walk · Shift to run · Space to jump · Drag to look",
-      touchHelp:"Move with the left pad. Swipe the street to look around.",allControls:"WASD or the arrow keys to walk. Shift to run, Space to jump. Drag to look and scroll to zoom. M opens the map. Esc pauses.",
-      touchControls:"Use the left pad to walk. Tap Run to change pace, tap Jump to leap, and swipe the street to look around. Open Map to find the shops and markets.",
+      guidebook:"Guidebook",recovering:"Graphics interrupted. Restoring the city… You can return to the menu below.",map:"Map",pause:"Pause",paused:"Game paused",resume:"Resume walk",restart:"Restart game",settings:"Settings",main:"Main menu",atlas:"DHAKA / DISTRICT 01",
+      run:"Run",jump:"Jump",help:"WASD walk · Shift run · Space jump · E talk · Drag to look",
+      touchHelp:"Move with the left pad. Swipe the street to look around.",allControls:"WASD or the arrow keys to walk. Shift to run, Space to jump. Drag or use I J K L to look. Home centres the camera. Scroll to zoom. M opens the map. Esc pauses.",
+      touchControls:"Use the left pad to walk. Tap Run to change pace, tap Jump to leap, and swipe the street to look around. Open Map to find the neighbour who needs help.",
       textures:"Opening the shop shutters…",roads:"Laying out the streets…",people:"The neighborhood is waking up…",start:"Arriving on Islampur Road…",
       failed:"The district couldn’t open. Reload to try again. A browser with WebGL is required.",close:"Close map",openMap:"Open district map",
-      marker:"You",east:"E",north:"N",walk:"Walk through Old Dhaka",districtMap:"District map and player location"},
-    bn:{chapter:"ঢাকা / মুক্ত ভ্রমণ",field:"সাইবার ৭২ / মাঠের খাতা ০১",old:"পুরান ঢাকা",arrival:"ইসলামপুর রোড · বংশাল বাজার",
+      walk:"Walk through Old Dhaka",districtMap:"District map, your position and active NPC"},
+    bn:{chapter:"ঢাকা / সাইবার অভিযান",field:"সাইবার ৭২ / মাঠের খাতা ০১",old:"পুরান ঢাকা",arrival:"ইসলামপুর রোড · বংশাল বাজার",
       departure:"সাইবার ৭২ / পরের গন্তব্য",stepArt:"রং ও ছবি",stepStreets:"রাস্তাঘাট",stepPeople:"পাড়ার মানুষ",stepReady:"প্রস্তুত",
       districtOne:"এলাকা ০১",arrivalShort:"ইসলামপুর, ঢাকা",loadingWorld:"গল্পে ভরা একটি শহর। একটু সতর্কতায় অনেকটা নিরাপত্তা।",
       tipCode:"তোমার ওটিপি শুধু তোমার। কাউকে বলো না।",tipLink:"চেনা লোগো দেখেই বিশ্বাস নয়। লিংকে চাপ দেওয়ার আগে যাচাই করো।",tipMoney:"হঠাৎ টাকা চাইছে? আগে ফোন করে নিশ্চিত হও।",tipReady:"চারপাশ দেখো। সময় নিয়ে শেখো। প্রতিবেশীদের পাশে থাকো।",
-      map:"মানচিত্র",pause:"বিরতি",paused:"খেলায় বিরতি",resume:"খেলায় ফিরো",restart:"আবার শুরু করো",settings:"সেটিংস",main:"মূল মেনু",atlas:"ঢাকা / এলাকা ০১",
-      run:"দৌড়",jump:"লাফ",help:"WASD বা ↑↓←→ হাঁটা · Shift দৌড় · Space লাফ · টেনে চারপাশ দেখো",
-      touchHelp:"বাঁ দিকের প্যাড দিয়ে হাঁটো। চারপাশ দেখতে রাস্তায় আঙুল টানো।",allControls:"WASD বা তির চিহ্ন দিয়ে হাঁটো। Shift ধরে দৌড়াও, Space চেপে লাফ দাও। মাউস টেনে চারপাশ দেখো, স্ক্রল করে দূরত্ব বদলাও। M চেপে মানচিত্র ও Esc চেপে বিরতি।",
-      touchControls:"বাঁ দিকের প্যাডে হাঁটো। দৌড় বা লাফের জন্য বোতাম ছোঁও। চারপাশ দেখতে রাস্তায় আঙুল টানো। দোকান ও বাজার খুঁজতে মানচিত্র খোলো।",
+      guidebook:"গাইডবুক",recovering:"গ্রাফিক্স থেমেছে। শহর ফিরিয়ে আনা হচ্ছে… নিচে মূল মেনুতে ফিরতে পারো।",map:"মানচিত্র",pause:"বিরতি",paused:"খেলায় বিরতি",resume:"খেলায় ফিরো",restart:"নতুন করে শুরু",settings:"সেটিংস",main:"মূল মেনু",atlas:"ঢাকা / এলাকা ০১",
+      run:"দৌড়",jump:"লাফ",help:"WASD হাঁটা · Shift দৌড় · Space লাফ · E কথা · টেনে চারপাশ দেখো",
+      touchHelp:"বাঁ দিকের প্যাড দিয়ে হাঁটো। চারপাশ দেখতে রাস্তায় আঙুল টানো।",allControls:"WASD বা তির চিহ্ন দিয়ে হাঁটো। Shift ধরে দৌড়াও, Space চেপে লাফ দাও। মাউস টেনে বা I J K L দিয়ে চারপাশ দেখো, Home চেপে ক্যামেরা ফেরাও। স্ক্রল করে দূরত্ব বদলাও। M চেপে মানচিত্র ও Esc চেপে বিরতি।",
+      touchControls:"বাঁ দিকের প্যাডে হাঁটো। দৌড় বা লাফের জন্য বোতাম ছোঁও। চারপাশ দেখতে রাস্তায় আঙুল টানো। সাহায্যপ্রার্থী প্রতিবেশীকে খুঁজতে মানচিত্র খোলো।",
       textures:"দোকানের ঝাঁপ খুলছে…",roads:"রাস্তাঘাট সাজানো হচ্ছে…",people:"পাড়াটা জেগে উঠছে…",start:"ইসলামপুর রোডে পৌঁছাচ্ছ…",
-      failed:"এলাকাটি খোলা যায়নি। আবার লোড করে দেখো। WebGL সমর্থিত ব্রাউজার প্রয়োজন।",close:"মানচিত্র বন্ধ করো",openMap:"এলাকার মানচিত্র খোলো",marker:"তুমি",east:"পূ",north:"উ",walk:"পুরান ঢাকায় ঘুরে বেড়াও",districtMap:"এলাকার মানচিত্র ও তোমার অবস্থান"}
+      failed:"এলাকাটি খোলা যায়নি। আবার লোড করে দেখো। WebGL সমর্থিত ব্রাউজার প্রয়োজন।",close:"মানচিত্র বন্ধ করো",openMap:"এলাকার মানচিত্র খোলো",walk:"পুরান ঢাকায় ঘুরে বেড়াও",districtMap:"এলাকার মানচিত্র, তোমার অবস্থান ও সাহায্যপ্রার্থী প্রতিবেশী"}
   };
   const canvas=el("city-screen"),keys=new Set(),coarse=matchMedia("(pointer: coarse)");
   let prefs={language:"en",name:"Rakib"},sfx=()=>{},active=false,panel="loading",ready,world,life,scene,renderer,camera,sun,hero,footShade;
-  let t=0,previous=0,frame=0,loop=0,progress=0,reveal=0,ratio=1,ratioFloor=1,cost=0,samples=0,softwareGPU=false;
+  let contextLost=false,qualityApplied="",cameraOffset=0,cameraLift=.16,footDistance=0;
+  let t=0,previous=0,frame=0,loop=0,progress=0,reveal=0,ratio=1,ratioFloor=1,cost=0,samples=0,softwareGPU=false,missions;
   const spawnYaw=-.91,spawnBoom=4.15;
   const player={x:S.spawn.x,y:.19,z:S.spawn.z,vx:0,vy:0,vz:0,heading:Math.PI+spawnYaw,grounded:true,coyote:.1,jumpAge:0,landing:0};
   const controls={x:0,y:0,run:false,jump:0,drag:null,pad:null,yaw:spawnYaw,pitch:.16,distance:spawnBoom,boom:spawnBoom,basis:spawnYaw,moveAngle:0,wasMoving:false,manualUntil:0};
@@ -39,14 +40,15 @@ window.C72Game = (() => {
     prefs=value;
     document.querySelectorAll("[data-city]").forEach(item=>{
       let key=item.dataset.city;if(coarse.matches&&key==="help")key="touchHelp";if(coarse.matches&&key==="allControls")key="touchControls";
-      item.textContent=w()[key];
+      item.textContent=(w()[key]||"").replace("WASD",prefs.keyLayout==="zqsd"?"ZQSD":"WASD");
     });
     el("radar").setAttribute("aria-label",w().openMap);el("close-map").setAttribute("aria-label",w().close);
     canvas.setAttribute("aria-label",w().walk);el("city-view").setAttribute("aria-label",w().old);
     el("district-map").setAttribute("aria-label",w().districtMap);
-    refreshLegend();
+    el('city-progress').setAttribute('aria-label',prefs.language==='bn'?'এলাকা লোড হচ্ছে':'Loading the district');
     updateHUD();
     if(panel==="loading")loading(progress);
+    missions?.preferences(value);applyQuality();
   }
   function loading(fraction) {
     progress=clamp(fraction,0,1);el("city-progress").value=progress*100;
@@ -57,28 +59,12 @@ window.C72Game = (() => {
     window.C72Presentation?.progress(progress);
   }
   const localDigits=value=>prefs.language==="bn"?String(value).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]):String(value);
-  function refreshLegend(){
-    function entry(id,label,shop=false){
-      const span=document.createElement("span"),b=document.createElement("b");
-      b.textContent=id;if(shop)span.className="shop-key";
-      span.append(b,document.createTextNode(label[prefs.language]||label.en));return span;
-    }
-    el("map-key").replaceChildren(...S.pois.map(p=>entry(localDigits(p.icon),p)));
-    const shops=(world?.branches||[]).map(b=>{
-      const store=C72District.retailNames[b.key];
-      return entry(String.fromCharCode(65+store.tile),store,true);
-    });
-    el("shop-key").replaceChildren(...shops);
-  }
   function updateHUD() {
-    el("street-name").textContent=street();el("pause-location").textContent=prefs.name+" · "+street();
+    el("pause-location").textContent=prefs.name+" · "+street();
     if(world){
       paintMap(el("mini-map"),false);
       if(panel==="map"){
         paintMap(el("district-map"),true);
-        const metres=new Intl.NumberFormat(prefs.language==="bn"?"bn-BD":"en").format;
-        const unit=prefs.language==="bn"?" মি ":" m ";
-        el("map-position").textContent=prefs.name+" · "+street()+"   /   "+metres(Math.round(player.x-S.limits.left))+unit+w().east+" · "+metres(Math.round(S.limits.south-player.z))+unit+w().north;
       }
     }
   }
@@ -86,54 +72,105 @@ window.C72Game = (() => {
     const c=target.getContext("2d"),width=target.width,height=target.height;
     const span=full?309:67,scale=width/span,cx=full?-1:player.x,cz=full?-26:player.z;
     const X=x=>(x-cx)*scale+width/2,Z=z=>(z-cz)*scale+height/2;
-    c.fillStyle=full?"#c9c29f":"#777d68";c.fillRect(0,0,width,height);
-    c.fillStyle=full?"#a79f81":"#525e51";
+    c.fillStyle=full?"#27332d":"#253029";c.fillRect(0,0,width,height);
+    c.fillStyle=full?"#415047":"#46534a";
     for(const [x,z,ww,dd] of world.structures) c.fillRect(X(x-ww/2),Z(z-dd/2),ww*scale,dd*scale);
-    c.fillStyle=full?"#e7dcb9":"#d8caa8";
+    c.fillStyle=full?"#9b9c83":"#b6b29a";
     c.strokeStyle=c.fillStyle;c.lineCap="round";
     for(const road of S.xs){c.beginPath();c.lineWidth=S.halfX(road)*2*scale;for(let z=-155;z<=71;z+=1.5){const x=road+C72Terrain.bendX(road,z);if(z===-155)c.moveTo(X(x),Z(z));else c.lineTo(X(x),Z(z));}c.stroke();}
     for(const road of S.zs){c.beginPath();c.lineWidth=S.halfZ(road)*2*scale;for(let x=-150;x<=150;x+=1.5){const z=road+C72Terrain.bendZ(road,x);if(x===-150)c.moveTo(X(x),Z(z));else c.lineTo(X(x),Z(z));}c.stroke();}
-    c.fillStyle=full?"#869a73":"#83976d";
-    for(const tree of world.trees){
-      const x=X(tree.x),z=Z(tree.z);if(x<0||x>width||z<0||z>height)continue;
-      c.beginPath();c.arc(x,z,full?2.5:2,0,Math.PI*2);c.fill();
+    const missionPoint=missions?.point();
+    if(missionPoint){const x=X(missionPoint.x),z=Z(missionPoint.z);c.beginPath();c.arc(x,z,full?10:6,0,Math.PI*2);c.fillStyle="#ffb45d";c.fill();c.lineWidth=2;c.strokeStyle="#fff0d1";c.stroke();c.fillStyle="#30271c";c.font="bold "+(full?14:10)+"px sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillText("!",x,z);}
+    // Player arrow faces the same direction as Rakib. Keep it above the nearby NPC dot.
+    c.save();c.translate(X(player.x),Z(player.z));
+    c.beginPath();c.arc(0,0,full?16:12,0,Math.PI*2);c.fillStyle='#122a24b3';c.fill();
+    c.rotate(Math.PI-player.heading);const size=full?1.35:1.05;c.scale(size,size);
+    c.beginPath();c.moveTo(0,-10);c.lineTo(6.5,7);c.lineTo(0,3.5);c.lineTo(-6.5,7);c.closePath();
+    c.fillStyle='#69e1c1';c.fill();c.lineWidth=2;c.strokeStyle='#fff8df';c.stroke();c.restore();
+
+  }
+  // Capture the actual speaker with the existing renderer; no extra WebGL context.
+  function portrait(person,output){
+    const root=person?.kit?.root;
+    if(!root||!renderer?.getRenderTarget)return false;
+    const parent=root.parent,position=root.position.clone(),rotation=root.quaternion.clone();
+    const previousTarget=renderer.getRenderTarget(),clear=renderer.getClearColor(new T.Color()),alpha=renderer.getClearAlpha();
+    const width=output.width,height=output.height,target=new T.WebGLRenderTarget(width,height,{depthBuffer:true});
+    target.texture.colorSpace=T.SRGBColorSpace;
+    try{
+      const stage=new T.Scene(),eye=new T.PerspectiveCamera(34,width/height,.1,10);
+      stage.add(new T.HemisphereLight(0xfff4dc,0x586959,2.1));
+      const key=new T.DirectionalLight(0xffe2bd,2.5);key.position.set(-2,3,4);stage.add(key);
+      const rim=new T.DirectionalLight(0xd9efdd,1.8);rim.position.set(2,2,-2);stage.add(rim);
+      stage.add(root);root.position.set(0,0,0);root.rotation.set(0,-.12,0);
+      const bounds=new T.Box3().setFromObject(root),top=bounds.max.y;
+      eye.position.set(0,top-.25,2.15);eye.lookAt(0,top-.43,0);
+      renderer.setRenderTarget(target);renderer.setClearColor(0x000000,0);renderer.clear();renderer.render(stage,eye);
+      const pixels=new Uint8Array(width*height*4),ctx=output.getContext('2d'),picture=ctx.createImageData(width,height);
+      renderer.readRenderTargetPixels(target,0,0,width,height,pixels);
+      for(let y=0;y<height;y++)picture.data.set(pixels.subarray((height-y-1)*width*4,(height-y)*width*4),y*width*4);
+      ctx.putImageData(picture,0,0);return true;
+    }catch{return false;}
+    finally{parent?.add(root);root.position.copy(position);root.quaternion.copy(rotation);root.updateMatrixWorld(true);renderer.setRenderTarget(previousTarget);renderer.setClearColor(clear,alpha);target.dispose();}
+  }
+  let deathFrame=0,deathToken=0;
+  function death(done){
+    const token=++deathToken;cancelAnimationFrame(deathFrame);cancelAnimationFrame(loop);loop=0;showPanel('dying');
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    C72DeathAudio.play(prefs,reduced);
+    let started;
+    const origin=new T.Vector3(player.x,S.groundAt(player.x,player.z),player.z);
+    const screenRight=new T.Vector3(1,0,0).applyQuaternion(camera.quaternion);
+    function draw(now){
+      if(token!==deathToken||!active)return;
+      started??=now;const elapsed=reduced?C72DeathMotion.duration:Math.min(C72DeathMotion.duration,(now-started)/1000);
+      const state=C72DeathMotion.sample(elapsed),fall=clamp(elapsed/2.65,0,1),ease=fall*fall*(3-2*fall);
+      hero.pose('death',elapsed);hero.collapse(state,origin,player.heading,S.groundAt);
+      const shadowDrift=new T.Vector3(state.x,state.height,state.z).applyAxisAngle(new T.Vector3(0,1,0),player.heading);
+      footShade.position.set(origin.x+shadowDrift.x,S.groundAt(origin.x+shadowDrift.x,origin.z+shadowDrift.z)+.025,origin.z+shadowDrift.z);footShade.scale.set(.82+.5*ease,1,.6+.2*ease);
+      aim.copy(origin);aim.y+=.88-.55*ease;
+      if(innerWidth>700)aim.addScaledVector(screenRight,1.05*ease);else aim.y-=.45*ease;
+      camera.lookAt(aim);renderer.shadowMap.needsUpdate=true;renderer.render(scene,camera);
+      if(elapsed<C72DeathMotion.duration)deathFrame=requestAnimationFrame(draw);else{deathFrame=0;done();}
     }
-    for(const branch of world.branches){
-      const shop=C72District.retailNames[branch.key],x=X(branch.x),z=Z(branch.z),r=full?8:3.6;
-      c.fillStyle=full?"#345f58":"#68b7a9";c.fillRect(x-r,z-r,r*2,r*2);
-      if(full){c.fillStyle="#fff7de";c.font="bold 11px sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillText(String.fromCharCode(65+shop.tile),x,z+.5);}
-    }
-    for(const p of S.pois){
-      c.fillStyle=full?"#79562f":"#a77336";c.beginPath();c.arc(X(p.x),Z(p.z),full?9:3.5,0,2*Math.PI);c.fill();
-      if(full){c.fillStyle="#fff3cc";c.textAlign="center";c.textBaseline="middle";c.font='bold 10px "Nirmala UI",sans-serif';c.fillText(localDigits(p.icon),X(p.x),Z(p.z)+.5);}
-    }
-    c.save();c.translate(X(player.x),Z(player.z));c.rotate(Math.PI-player.heading);
-    const k=full?1.02:1.28;
-    c.scale(k,k);c.beginPath();c.moveTo(0,-9);c.lineTo(6,6);c.lineTo(0,3);c.lineTo(-6,6);c.closePath();
-    c.fillStyle="#175b4d";c.fill();c.lineWidth=2.0;c.strokeStyle="#fff3ce";c.stroke();c.restore();
+    deathFrame=requestAnimationFrame(draw);
   }
   function clearInput() {
     keys.clear();controls.x=controls.y=controls.jump=0;controls.drag=controls.pad=null;controls.wasMoving=false;
     controls.run=false;el("touch-run").setAttribute("aria-pressed","false");el("walk-pad").firstElementChild.style.transform="";
   }
   function showPanel(next) {
-    panel=next;clearInput();previous=0;C72Ambience.setPlaying(active&&next==="play");
-    el("city-loading").hidden=next!=="loading"&&next!=="error";el("city-map").hidden=next!=="map";
+    panel=next;clearInput();axisUntil.clear();previous=0;C72Ambience.setPlaying(active&&next==="play");
+    const journeyOverlay=el("journey-overlay");if(journeyOverlay)journeyOverlay.hidden=next!=="journey";
+    const missionOverlay=el("mission-overlay");if(missionOverlay)missionOverlay.hidden=next!=="mission";
+    el("city-loading").hidden=next!=="loading"&&next!=="error"&&next!=="recovering";el("city-map").hidden=next!=="map";
     el("city-loading").setAttribute("aria-busy",String(next==="loading"));
     el("city-pause").hidden=next!=="pause";el("city-hud").hidden=next!=="play";
     if(!active)return;
     if(next==="play"){canvas.focus({preventScroll:true});queue();}
     if(next==="pause"){updateHUD();el("resume-play").focus({preventScroll:true});}
     if(next==="map"){updateHUD();el("close-map").focus({preventScroll:true});}
+    if(next==="recovering")el("load-caption").textContent=w().recovering;
     if(next==="error"){el("load-caption").textContent=w().failed;window.C72Presentation?.error();}
   }
   function resetPlayer() {
+    if(hero)hero.root.rotation.set(0,player.heading,0,'YXZ');
     Object.assign(player,{x:S.spawn.x,y:S.groundAt(S.spawn.x,S.spawn.z),z:S.spawn.z,vx:0,vy:0,vz:0,heading:Math.PI+spawnYaw,grounded:true});
     Object.assign(controls,{yaw:spawnYaw,pitch:.16,basis:spawnYaw,distance:spawnBoom,boom:spawnBoom,wasMoving:false,manualUntil:0});
+    cameraOffset=0;cameraLift=.16;footDistance=0;
     reveal=t+16;el("city-help").classList.remove("faded");
   }
+  function applyQuality(force=false){
+    if(!renderer||!sun)return;
+    const quality=prefs.quality||'auto';if(!force&&qualityApplied===quality)return;qualityApplied=quality;
+    const cap=quality==='low'?.75:quality==='medium'?1:quality==='high'?1.5:softwareGPU?.78:1.5;
+    ratio=Math.min(devicePixelRatio||1,cap,Math.sqrt((softwareGPU?680000:1700000)/Math.max(1,innerWidth*innerHeight)));
+    ratioFloor=Math.min(ratio,softwareGPU?.6:quality==='low'?.65:.8);
+    renderer.shadowMap.enabled=quality!=='low'&&!softwareGPU;renderer.shadowMap.needsUpdate=true;
+    life?.quality?.(quality);resize();
+  }
   function resize() {
-    if(!renderer||!active)return;
+    if(!renderer||!camera||!active)return;
     const width=canvas.clientWidth||innerWidth,height=canvas.clientHeight||innerHeight;
     renderer.setPixelRatio(ratio);renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();
   }
@@ -180,10 +217,11 @@ window.C72Game = (() => {
     loading(.22);await new Promise(r=>setTimeout(r,0));
     world=await S.build(scene,loading);
     world.branches.sort((a,b)=>C72District.retailNames[a.key].tile-C72District.retailNames[b.key].tile);
-    refreshLegend();
     hero=C72People.create({role:"player",seed:72});scene.add(hero.root);
     life=await C72Life.create(scene,world,loading);
-    footShade=life.shadow(scene,.87,.59);
+    missions=window.C72Missions?.create({scene,world,life,player,camera,prefs,portrait,livePortrait:(person,output,energy)=>window.C72Portrait?.start(renderer,person,output,energy)||(()=>{}),death,panel:showPanel,restart:restartGame,sound:()=>sfx()});
+    missions?.prepare();
+    footShade=life.shadow(scene,.87,.59);applyQuality(true);
     loading(.95);life.update(0,t,player);posePlayer(0);follow(1,true);updateHUD();
     renderer.shadowMap.needsUpdate=true;renderer.render(scene,camera);
     loading(1);
@@ -194,10 +232,12 @@ window.C72Game = (() => {
     if(!ready){showPanel("loading");ready=build();}
     try{
       await ready;if(!active)return;
+      if(contextLost){showPanel('recovering');return;}
       resize();posePlayer(0);follow(1,true);showPanel("play");updateHUD();
+      missions?.resume();
     }catch(err){console.error("Old Dhaka could not start",err);if(active)showPanel("error");}
   }
-  function leave(){active=false;C72Ambience.setPlaying(false);cancelAnimationFrame(loop);loop=0;clearInput();previous=0;}
+  function leave(){C72DeathAudio.stop();deathToken++;cancelAnimationFrame(deathFrame);active=false;missions?.leave();C72Ambience.setPlaying(false);cancelAnimationFrame(loop);loop=0;clearInput();previous=0;}
 
   const radius=.27,height=1.68;
   function footprint(b,x,z,r) {
@@ -222,8 +262,11 @@ window.C72Game = (() => {
   let axisUntil=new Map();
   const held=code=>keys.has(code)||(axisUntil.get(code)||-1)>t;
   function move(dt) {
-    let side=Number(held("KeyD")||held("ArrowRight"))-Number(held("KeyA")||held("ArrowLeft"))+controls.x;
-    let forward=Number(held("KeyW")||held("ArrowUp"))-Number(held("KeyS")||held("ArrowDown"))-controls.y;
+    const oldX=player.x,oldZ=player.z;
+    const yawInput=Number(keys.has('KeyJ'))-Number(keys.has('KeyL')),pitchInput=Number(keys.has('KeyI'))-Number(keys.has('KeyK'));
+    if(yawInput||pitchInput){controls.yaw+=yawInput*dt*1.5;controls.pitch=clamp(controls.pitch+pitchInput*dt,-.19,.96);controls.manualUntil=t+2.2;controls.basis=controls.yaw;}
+    let side=Number(held("KeyD")||held("ArrowRight"))-Number(held(prefs.keyLayout==="zqsd"?"KeyQ":"KeyA")||held("ArrowLeft"))+controls.x;
+    let forward=Number(held(prefs.keyLayout==="zqsd"?"KeyZ":"KeyW")||held("ArrowUp"))-Number(held("KeyS")||held("ArrowDown"))-controls.y;
     const mag=Math.hypot(side,forward),walking=mag>.075,run=keys.has("ShiftLeft")||keys.has("ShiftRight")||controls.run;
     const angle=Math.atan2(side,forward);
     if(!controls.wasMoving||controls.drag!==null||Math.abs(headingDelta(controls.moveAngle,angle))>.34){
@@ -252,10 +295,11 @@ window.C72Game = (() => {
       }
     }
     if(player.y<=floor+.012&&player.vy<=0||player.grounded){
-      if(!player.grounded)player.landing=clamp(-player.vy/7,0,1);
+      if(!player.grounded){player.landing=clamp(-player.vy/7,0,1);C72DeathAudio.step(prefs,false,S.onRoad(player.x,player.z),player.landing);footDistance=0;}
       player.grounded=true;player.vy=0;player.y=floor;
     }
     const horizontal=Math.hypot(player.vx,player.vz);
+    if(player.grounded&&horizontal>.2){footDistance+=Math.hypot(player.x-oldX,player.z-oldZ);const stride=horizontal>2.75?1.2:.65;if(footDistance>=stride){footDistance%=stride;C72DeathAudio.step(prefs,horizontal>2.75,S.onRoad(player.x,player.z));}}
     if(horizontal>.075)player.heading+=headingDelta(player.heading,Math.atan2(player.vx,player.vz))*(1-Math.exp(-dt*12));
     if(walking&&horizontal>.55&&controls.drag===null&&t>controls.manualUntil){
       controls.yaw+=headingDelta(controls.yaw,player.heading+Math.PI)*(1-Math.exp(-dt*1.65));
@@ -276,33 +320,41 @@ window.C72Game = (() => {
   let cameraHeight=player.y;
   function follow(dt,snap=false) {
     cameraHeight=snap?player.y:cameraHeight+(player.y-cameraHeight)*(1-Math.exp(-dt*(player.grounded?9:14)));
-    const cy=Math.cos(controls.yaw),sy=Math.sin(controls.yaw),cp=Math.cos(controls.pitch),sp=Math.sin(controls.pitch);
-    // The boom pulls forward before it can pass through a wall, bus or canopy.
     aim.set(player.x,cameraHeight+1.29,player.z);
-    let boom=controls.distance;
-    for(let d=.12;d<controls.distance;d+=.16){
-      const x=aim.x+sy*cp*d,y=aim.y+sp*d,z=aim.z+cy*cp*d;
-      if(y<S.groundAt(x,z)+.22||world.near(x,z).some(b=>b.top>y-.1&&b.bottom<y+.1&&footprint(b.camera||b,x,z,.23))||y<2.8&&life.contact(x,z,.1)){
-        boom=Math.max(.065,d-.17);break;
-      }
+    function clearance(yaw,pitch,distance){
+      const sy=Math.sin(yaw),cy=Math.cos(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch);
+      for(let d=.12;d<=distance+.16;d+=.16){
+        const reach=Math.min(d,distance),x=aim.x+sy*cp*reach,y=aim.y+sp*reach,z=aim.z+cy*cp*reach;
+        // Shop overhangs are overhead, not solid columns down to the pavement.
+        if(y<S.groundAt(x,z)+.23||world.near(x,z).some(b=>b.top>y-.15&&b.bottom<y+.15&&footprint(y>2.15?(b.camera||b):b,x,z,.25))||y<2.8&&life.contact(x,z,.15)||reach>.7&&life.nearbyPeople(x,z).some(n=>Math.hypot(n.x-x,n.z-z)<.32&&y<S.groundAt(n.x,n.z)+1.75))return Math.max(.065,reach-.23);
+      }return distance;
     }
+    const solution=window.C72CameraRig?.solve(controls.yaw,controls.pitch,controls.distance,clearance)||{yaw:controls.yaw,pitch:controls.pitch,distance:clearance(controls.yaw,controls.pitch,controls.distance)};
+    const wanted=headingDelta(controls.yaw,solution.yaw),ease=snap?1:1-Math.exp(-dt*5);
+    const nextOffset=cameraOffset+headingDelta(cameraOffset,wanted)*ease,nextLift=cameraLift+(solution.pitch-cameraLift)*ease;
+    // Do not interpolate through a wall while switching to an open shoulder.
+    if(clearance(controls.yaw+nextOffset,nextLift,Math.min(controls.boom,1.8))<.6){cameraOffset=wanted;cameraLift=solution.pitch;}
+    else{cameraOffset=nextOffset;cameraLift=nextLift;}
+    const yaw=controls.yaw+cameraOffset,cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(cameraLift),sp=Math.sin(cameraLift);
+    const boom=clearance(yaw,cameraLift,controls.distance);
     controls.boom=snap||boom<controls.boom?boom:controls.boom+(boom-controls.boom)*(1-Math.exp(-dt*4));
     hero.root.visible=controls.boom>.48;
-    // Keep the player below the horizon, with an unobstructed view down the street.
-    eye.set(player.x+sy*cp*controls.boom,Math.max(S.groundAt(player.x,player.z)+.25,cameraHeight+1.29+sp*controls.boom),player.z+cy*cp*controls.boom);
-    look.set(player.x-sy*.82,cameraHeight+1.31,player.z-cy*.82);
+    eye.set(player.x+sy*cp*controls.boom,cameraHeight+1.29+sp*controls.boom,player.z+cy*cp*controls.boom);
+    const ahead=controls.boom<2?.12:.48;
+    look.set(player.x-sy*ahead,cameraHeight+1.31,player.z-cy*ahead);
     camera.position.copy(eye);camera.lookAt(look);sky.position.copy(camera.position);
   }
-  function queue(){if(active&&panel==="play"&&!document.hidden&&!loop)loop=requestAnimationFrame(tick);}
+  function queue(){if(active&&!contextLost&&panel==="play"&&!document.hidden&&!loop)loop=requestAnimationFrame(tick);}
   let streamTime=0,nextHUD=0;
   function tick(now) {
-    loop=0;if(!active||panel!=="play"||document.hidden)return;
+    loop=0;if(!active||contextLost||panel!=="play"||document.hidden)return;
     const elapsed=previous?(now-previous)/1000:1/60;previous=now;
     // Substeps bound the collision displacement, even when a slow frame stalls.
     const dt=Math.min(Math.max(.001,elapsed),.085),steps=Math.ceil(dt/(1/60));
     frame++;t+=dt;
     for(let i=0;i<steps;i++)move(dt/steps);
     life.update(dt,t,player);world.terrain.update(dt);posePlayer(dt);follow(dt);
+    missions?.update(t);
     C72Ambience.update(player,controls.yaw,life,world.branches);
     if(t>=streamTime){world.loadNearby(player.x,player.z,1);streamTime=t+.10;}
     renderer.render(scene,camera);
@@ -313,10 +365,11 @@ window.C72Game = (() => {
     }
     queue();
   }
-  const movementCodes=new Set(["KeyW","KeyA","KeyS","KeyD","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"]);
+  const movementCodes=new Set(["KeyW","KeyA","KeyS","KeyD","KeyQ","KeyZ","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"]);
   document.addEventListener("keydown",event=>{
     if(!active||event.ctrlKey||event.metaKey||event.altKey||event.isComposing)return;
     const code=event.code;
+    if(panel==="mission"||panel==="journey"){missions?.key(event);return;}
     if(event.key==="Tab"&&(panel==="pause"||panel==="map")){
       const overlay=el(panel==="pause"?"city-pause":"city-map"),buttons=overlay.querySelectorAll("button");
       if(buttons.length===1||event.shiftKey&&document.activeElement===buttons[0]||!event.shiftKey&&document.activeElement===buttons[buttons.length-1]){
@@ -331,6 +384,9 @@ window.C72Game = (() => {
       event.preventDefault();if(!event.repeat){sfx();axisUntil.clear();showPanel(panel==="map"?"play":"map");}return;
     }
     if(panel!=="play")return;
+    if(code==='Home'){event.preventDefault();controls.yaw=player.heading+Math.PI;controls.pitch=.16;controls.manualUntil=t+2.2;return;}
+    if(['KeyI','KeyJ','KeyK','KeyL'].includes(code)){event.preventDefault();keys.add(code);return;}
+    if(code==="KeyE"){event.preventDefault();if(!event.repeat)missions?.open();return;}
     if(code==="Space"&&document.activeElement?.tagName==="BUTTON")return;
     if(movementCodes.has(code)||code==="Space"||code.startsWith("Shift")){
       event.preventDefault();keys.add(code);
@@ -347,8 +403,14 @@ window.C72Game = (() => {
     if(document.hidden){suspendInput();cancelAnimationFrame(loop);loop=0;previous=0;}
     else queue();
   });
-  window.addEventListener("resize",resize);
+  window.addEventListener("resize",()=>{if(renderer&&sun)applyQuality(true);else resize();});
   canvas.addEventListener("contextmenu",e=>e.preventDefault());
+  canvas.addEventListener('webglcontextlost',event=>{
+    event.preventDefault();contextLost=true;cancelAnimationFrame(loop);loop=0;deathToken++;cancelAnimationFrame(deathFrame);C72DeathAudio.stop();missions?.leave();if(active)showPanel('recovering');
+  });
+  canvas.addEventListener('webglcontextrestored',()=>{
+    contextLost=false;if(!world||!footShade)return;applyQuality(true);if(active){posePlayer(0);follow(1,true);renderer.shadowMap.needsUpdate=true;showPanel('play');missions?.resume();}
+  });
   let lastX=0,lastY=0;
   canvas.addEventListener("pointerdown",e=>{
     if(panel!=="play"||controls.drag!==null)return;
@@ -356,7 +418,7 @@ window.C72Game = (() => {
   });
   canvas.addEventListener("pointermove",e=>{
     if(e.pointerId!==controls.drag)return;
-    controls.yaw-=(e.clientX-lastX)*.006;controls.pitch=clamp(controls.pitch+(e.clientY-lastY)*.0045,-.19,.96);
+    const sensitivity=(prefs.sensitivity||100)/100;controls.yaw-=(e.clientX-lastX)*.006*sensitivity;controls.pitch=clamp(controls.pitch+(e.clientY-lastY)*.0045*sensitivity*(prefs.invertY?-1:1),-.19,.96);
     controls.manualUntil=t+2.2;controls.basis=controls.yaw;lastX=e.clientX;lastY=e.clientY;
   });
   function releaseLook(e){if(e.pointerId===controls.drag)controls.drag=null;}
@@ -376,12 +438,17 @@ window.C72Game = (() => {
   const button=(id,callback)=>el(id).addEventListener("click",()=>{sfx();axisUntil.clear();callback();});
   button("show-map",()=>showPanel("map"));button("radar",()=>showPanel("map"));button("close-map",()=>showPanel("play"));
   button("show-pause",()=>showPanel("pause"));button("resume-play",()=>showPanel("play"));
-  button("restart-play",()=>{
+  function restartGame(){
+    missions?.campaign.replay();missions?.leave();
     clearInput();t=0;frame=0;previous=0;streamTime=0;nextHUD=0;cost=0;samples=0;
-    resetPlayer();hero.reset();life.reset();world.loadNearby(player.x,player.z,64,40);
-    life.update(0,t,player);posePlayer(0);follow(1,true);updateHUD();showPanel("play");
-  });
+    C72DeathAudio.stop();deathToken++;cancelAnimationFrame(deathFrame);hero.root.rotation.set(0,player.heading,0,'YXZ');resetPlayer();hero.reset();life.reset();world.loadNearby(player.x,player.z,64,40);
+    missions?.prepare();life.update(0,t,player);posePlayer(0);follow(1,true);updateHUD();showPanel("play");missions?.resume();
+  }
+  button("restart-play",restartGame);button("open-guidebook",()=>missions?.guidebook());
   button("city-settings",()=>{location.hash="city-settings";});
   button("return-menu",()=>{location.hash="menu";});button("loading-back",()=>{location.hash="menu";});
-  return {enter,leave,setPreferences};
+  function storedCampaign(){let storage;try{storage=localStorage;}catch{}return window.C72Campaign?.create(storage);}
+  function campaignProgress(){return (missions?.campaign||storedCampaign())?.snapshot();}
+  function newRun(){const campaign=missions?.campaign||storedCampaign();campaign?.replay();missions?.leave();if(hero){resetPlayer();hero.reset();life.reset();missions?.prepare();}}
+  return {enter,leave,setPreferences,progress:campaignProgress,newRun};
 })();

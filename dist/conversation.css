@@ -1,0 +1,49 @@
+/* Story first. One speaker, three replies, no inspection dashboard. */
+#mission-overlay:not([data-kind=attacked]){padding:24px;background:linear-gradient(120deg,#10261fc4,#101b1bb0);backdrop-filter:blur(5px)}
+#mission-overlay:not([data-kind=attacked]) .mission-dialog{width:min(940px,100%);max-height:calc(100dvh - 48px);border-radius:26px;border:1px solid #b3c2a6;border-top:3px solid #ffc074;box-shadow:0 12px 0 #0b231d66,0 28px 100px #071b1799;background:#f7f1e3;overflow:auto}
+.mission-dialog-head{padding:10px 20px;min-height:58px;gap:10px;background:#203c32;border-color:#4e6756}
+#dialog-kicker{font:700 11px var(--sans);letter-spacing:.06em;color:#d5e4cb}
+.dialog-health{margin-left:auto;border:0;background:#325346;border-radius:20px;padding:7px 12px}
+#mission-close{width:36px;height:36px;border-radius:50%;background:#ffffff0b;border-color:#a4b89b66}
+.mission-columns{grid-template-columns:232px minmax(0,1fr)}
+.mission-story{justify-content:center;padding:24px 20px;background:radial-gradient(ellipse at 50% 35%,#77927555,transparent 70%),linear-gradient(160deg,#2b5342,#18392e)}
+.speaker-portrait{height:300px;border:0;background:radial-gradient(ellipse at 50% 42%,#b5cc8cbb,#7f9e6c55 55%,transparent 75%);border-radius:100px 100px 30px 30px;box-shadow:none;overflow:hidden}
+.portrait-orbit{top:55px;width:180px;height:180px;border-color:#deebc64d;box-shadow:0 0 0 20px #deebc60a,0 0 0 40px #deebc606}
+.npc-byline{margin-top:12px;gap:0}.npc-byline span{font-size:29px;letter-spacing:-.02em;color:#fff0ce}
+.speaker-wave{left:50%;transform:translateX(-50%);bottom:8px;border:0;border-radius:20px;background:#173b2de0;opacity:0;transition:opacity .2s}.is-speaking .speaker-wave{opacity:1}
+.conversation-main{padding:26px 28px 20px;display:flex;flex-direction:column;justify-content:center}
+.conversation-copy{border:0;padding:0}
+#dialog-title{font-size:19px;line-height:1.25;margin:0 0 16px;color:#526552;letter-spacing:-.02em;font-weight:700}
+#dialog-title:focus,#answer-title:focus{outline:none}
+#dialog-story{position:relative;background:#e5ecda;border:1px solid #b4c4a2;border-radius:4px 20px 20px 20px;padding:18px 20px;color:#243d2e;font-size:17px;line-height:1.65;box-shadow:0 4px 0 #b5c4a02b}
+.mission-decision{padding:0;background:none}
+.voice-controls{display:flex;align-items:center;gap:10px;margin:12px 0 18px;padding:0;border:0;flex-wrap:wrap}
+.voice-controls button{min-height:36px;margin:0;padding:7px 12px;background:#315741;color:#f6f7e5;border:1px solid #6a8958;border-radius:20px;font:650 12px var(--sans)}
+#voice-status{width:auto;flex:1;font-size:11px;color:#536c50;margin:0}
+#mission-options{gap:10px;margin-top:0}
+.mission-option{min-height:60px;padding:12px 38px 12px 12px;border:1px solid #b6c3ab;border-radius:14px;background:#fffdf5;box-shadow:0 4px 0 #d2d8c3;gap:12px;font-size:14px;line-height:1.5;color:#284130;transition:transform .16s,background .16s,box-shadow .16s;animation:reply-arrive .32s backwards}
+.mission-option b,.mission-option:nth-child(2) b,.mission-option:nth-child(3) b{height:32px;flex-basis:32px;width:32px;border:0;border-radius:10px;background:#e2ebd6;color:#41613c;font:800 14px var(--sans)}
+.mission-option::after{content:'→';color:#688757;font-size:21px}
+.mission-option:hover,.mission-option:focus-visible{background:#fff0cf;border-color:#cf9246;transform:translateX(4px);box-shadow:0 4px 0 #d7b785}
+.mission-option:hover b,.mission-option:focus-visible b{background:#ffba69;color:#49321d}.mission-option:hover::after{transform:translateX(3px)}
+.mission-option:active{transform:translate(4px,3px);box-shadow:0 1px 0 #d7b785}
+#mission-keyboard{font:500 10px var(--sans);margin:13px 0 0;color:#65745c}
+#answer-view{animation:reply-arrive .3s ease-out}#answer-view .answer-symbol{width:42px;height:42px;font-size:24px;margin:0 12px 12px 0;border-radius:14px}
+#answer-title{font-size:23px;line-height:1.25;margin:8px 0 12px;color:#254c34}
+#answer-cost{margin-top:10px;font-size:13px}#npc-response{font-size:16px;line-height:1.65;border-radius:4px 16px 16px 16px;background:#e5ecda;border:1px solid #bbc9ab;padding:14px 16px;margin:14px 0;color:#284232}
+.mission-lesson{background:transparent;border:0;border-top:1px solid #c7cfb8;padding:14px 0 0;border-radius:0}.mission-lesson strong{font-size:10px;color:#59734c}.mission-lesson p{font-size:13px;line-height:1.6;margin-top:5px}
+#answer-followup{font-size:12px;line-height:1.5}.mission-primary{border-radius:12px;margin-top:17px}.mission-secondary{border-radius:12px}
+html[lang=bn] #dialog-story{font-size:18px;line-height:1.7}html[lang=bn] .mission-option{font-size:16px;line-height:1.6}
+@keyframes reply-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:650px){
+ #mission-overlay:not([data-kind=attacked]){padding:12px}#mission-overlay:not([data-kind=attacked]) .mission-dialog{max-height:calc(100dvh - 24px);border-radius:20px}
+ .mission-dialog-head{padding:8px 14px;min-height:52px}.mission-columns{grid-template-columns:1fr}
+ .mission-story{display:flex;flex-direction:row;justify-content:flex-start;padding:9px 18px;gap:14px;min-height:88px}.speaker-portrait{width:64px;height:78px;flex-shrink:0;border-radius:26px 26px 12px 12px}.portrait-orbit{display:none}.npc-byline{margin:0;align-items:flex-start}.npc-byline span{font-size:23px}.speaker-wave{display:none}
+ .conversation-main{padding:18px}.conversation-copy{padding:0}#dialog-title{font-size:17px;margin-bottom:12px}#dialog-story{font-size:15px;line-height:1.6;padding:14px 16px}.voice-controls{margin:10px 0 14px}.mission-option{min-height:56px;font-size:13px;padding:11px 32px 11px 10px;gap:9px}#mission-keyboard{display:none}html[lang=bn] #dialog-story{font-size:16px}html[lang=bn] .mission-option{font-size:15px}
+}
+@media(max-height:500px) and (min-width:651px){
+ #mission-overlay:not([data-kind=attacked]){padding:8px}#mission-overlay:not([data-kind=attacked]) .mission-dialog{max-height:calc(100dvh - 16px)}
+ .mission-dialog-head{min-height:44px;padding:6px 14px!important}.mission-columns{grid-template-columns:130px minmax(0,1fr)}.mission-story{padding:14px!important;justify-content:flex-start}.speaker-portrait{width:100px;height:150px!important}.npc-byline span{font-size:21px}.conversation-main{padding:10px 18px!important}#dialog-title{font-size:17px!important;margin-bottom:7px}#dialog-story{font-size:14px!important;line-height:1.5;padding:8px 12px}.voice-controls{margin:6px 0 8px}.mission-option{min-height:44px;padding-block:7px}#mission-options{gap:6px}#mission-keyboard{display:none}.portrait-orbit{display:none}
+}
+#mission-overlay[data-kind=attacked] .conversation-main{display:block}#mission-overlay[data-kind=attacked] .voice-controls{margin-top:0}
+@media(prefers-reduced-motion:reduce){.mission-option,#answer-view,.speaker-wave{animation:none;transition:none}}

@@ -5,16 +5,17 @@
   const $$ = selector => Array.from(document.querySelectorAll(selector));
   const storageKey = "cyber72.preferences.v2";
   const previousStorageKey = "cyber72.preferences.v1";
-  const defaults = { name: "Rakib", language: "en", music: true, effects: true, ambience: true, musicVolume: 20, effectsVolume: 50, ambienceVolume: 35 };
+  const defaults = { name: "Rakib", language: "en", music: true, effects: true, ambience: true, musicVolume: 20, effectsVolume: 50, ambienceVolume: 35, voice:true, voiceVolume:80, muted:false, quality:"auto", sensitivity:100, invertY:false, keyLayout:"wasd" };
   const copy = {
     en: {
+      newGame:"New game",newGameWarning:"Start at level 1 with 100 Health? This clears your current campaign. Your settings stay saved.",cancel:"Keep my progress",startFresh:"Start a new run",continueGame:"Continue",muted:"Mute all audio",voice:"NPC dialogue",voiceVolume:"Dialogue volume",displayControls:"DISPLAY & CONTROLS",quality:"Graphics quality",qualityAuto:"Automatic",qualityLow:"Low",qualityMedium:"Medium",qualityHigh:"High",sensitivity:"Camera sensitivity",invertY:"Invert vertical look",keyLayout:"Movement keys",cameraHelp:"I J K L: look around · Home: centre camera · M: map · E: talk",protector:"Cyber protector",helper:"Neighbourhood helper",
       skip: "Skip to game", playerOne: "PLAYER 01", welcomeBadge: "WELCOME",
       adventure: "A BANGLADESH CYBER ADVENTURE", tagline: "Spot the scam. Protect your city.",
-      start: "Start game", startHint: "OLD DHAKA / FREE ROAM", settings: "Settings", locationLabel: "DISTRICT 01", location: "Islampur, Old Dhaka",
+      start: "Start game", startHint: "10 SCAMS / ONE CITY", settings: "Settings", locationLabel: "DISTRICT 01", location: "Islampur, Old Dhaka",
       level: "LV. 01", rookie: "Cyber Rookie",
       mainMenu: "Main menu", console: "PLAYER CONSOLE", identity: "PLAYER IDENTITY", playerName: "Character name",
       nameHelp: "Use up to 24 characters. Bangla names are welcome.", language: "Language", audio: "AUDIO",
-      music: "Background music", track: "Riverlight · title theme", musicVolume: "Music volume", effects: "Menu sound effects", effectsVolume: "Menu click volume", ambience: "Street ambience", ambienceVolume: "Street volume",
+      music: "Background music", track: "Riverlight · title theme", musicVolume: "Music volume", effects: "Game sound effects", effectsVolume: "Effects volume", ambience: "Street ambience", ambienceVolume: "Street volume",
       autoSave: "Saves on this device", sessionOnly: "Settings last for this visit", done: "Done",
       startKey: "Start", musicKey: "Music", edition: "MADE IN BANGLADESH", backCity: "Back to game",
       on: "On", off: "Off", turnOn: "Turn music on", turnOff: "Turn music off", startMusic: "Tap for music",
@@ -22,13 +23,14 @@
       musicError: "The soundtrack couldn’t start. Try switching music on again."
     },
     bn: {
+      newGame:"নতুন খেলা",newGameWarning:"১০০ স্বাস্থ্য নিয়ে প্রথম লেভেল থেকে শুরু করবে? বর্তমান অগ্রগতি মুছে যাবে। সেটিংস থাকবে।",cancel:"অগ্রগতি রাখো",startFresh:"নতুন অভিযান শুরু",continueGame:"চালিয়ে যাও",muted:"সব শব্দ বন্ধ",voice:"এনপিসির কথোপকথন",voiceVolume:"কণ্ঠের মাত্রা",displayControls:"পর্দা ও নিয়ন্ত্রণ",quality:"গ্রাফিক্সের মান",qualityAuto:"স্বয়ংক্রিয়",qualityLow:"কম",qualityMedium:"মাঝারি",qualityHigh:"উচ্চ",sensitivity:"ক্যামেরার সংবেদনশীলতা",invertY:"উপর-নিচ উল্টো দেখো",keyLayout:"হাঁটার বোতাম",cameraHelp:"I J K L: চারপাশ · Home: ক্যামেরা সোজা · M: মানচিত্র · E: কথা",protector:"সাইবার রক্ষক",helper:"পাড়ার সহায়ক",
       skip: "গেমে যাও", playerOne: "প্লেয়ার ০১", welcomeBadge: "স্বাগতম",
       adventure: "বাংলাদেশে সাইবার অভিযান", tagline: "ফাঁদ চিনে নাও। নিজের পাড়া সুরক্ষিত রাখো।",
-      start: "খেলা শুরু", startHint: "পুরান ঢাকা / মুক্ত ভ্রমণ", settings: "সেটিংস", locationLabel: "এলাকা ০১", location: "ইসলামপুর, পুরান ঢাকা",
+      start: "খেলা শুরু", startHint: "১০ প্রতারণা / এক শহর", settings: "সেটিংস", locationLabel: "এলাকা ০১", location: "ইসলামপুর, পুরান ঢাকা",
       level: "লেভেল ০১", rookie: "নবীন সাইবারযোদ্ধা",
       mainMenu: "মূল মেনু", console: "প্লেয়ার কনসোল", identity: "প্লেয়ার পরিচয়", playerName: "চরিত্রের নাম",
       nameHelp: "সর্বোচ্চ ২৪টি অক্ষর ব্যবহার করো। বাংলাতেও নাম লেখা যাবে।", language: "ভাষা", audio: "অডিও",
-      music: "আবহসংগীত", track: "রিভারলাইট · গেমের সুর", musicVolume: "সংগীতের মাত্রা", effects: "মেনুর শব্দ", effectsVolume: "মেনু ক্লিকের শব্দের মাত্রা", ambience: "রাস্তার আবহ", ambienceVolume: "রাস্তার শব্দের মাত্রা",
+      music: "আবহসংগীত", track: "রিভারলাইট · গেমের সুর", musicVolume: "সংগীতের মাত্রা", effects: "গেমের শব্দ", effectsVolume: "গেমের শব্দের মাত্রা", ambience: "রাস্তার আবহ", ambienceVolume: "রাস্তার শব্দের মাত্রা",
       autoSave: "এই ডিভাইসে সেভ হয়", sessionOnly: "সেটিংস শুধু এবারই থাকবে", done: "হয়ে গেছে",
       startKey: "শুরু", musicKey: "সংগীত", edition: "বাংলাদেশ সংস্করণ", backCity: "খেলায় ফিরো",
       on: "চালু", off: "বন্ধ", turnOn: "সংগীত চালু করো", turnOff: "সংগীত বন্ধ করো", startMusic: "সংগীত শুনতে চাপ দাও",
@@ -67,7 +69,9 @@
         musicVolume: volumeOr(saved.musicVolume, defaults.musicVolume),
         effectsVolume: volumeOr(saved.effectsVolume, defaults.effectsVolume),
         ambience: typeof saved.ambience === "boolean" ? saved.ambience : defaults.ambience,
-        ambienceVolume: volumeOr(saved.ambienceVolume, defaults.ambienceVolume)
+        ambienceVolume: volumeOr(saved.ambienceVolume, defaults.ambienceVolume),
+        voice:saved.voice!==false,voiceVolume:volumeOr(saved.voiceVolume,Number(localStorage.getItem('cyber72.voice.volume')??80)),muted:saved.muted===true,
+        quality:['auto','low','medium','high'].includes(saved.quality)?saved.quality:'auto',sensitivity:Number.isFinite(saved.sensitivity)?Math.min(200,Math.max(25,saved.sensitivity)):100,invertY:saved.invertY===true,keyLayout:saved.keyLayout==='zqsd'?'zqsd':'wasd' 
       };
     } catch {
       return { ...defaults };
@@ -111,28 +115,31 @@
   }
   function renderMusicButton() {
     const quick = $("#music-quick");
-    const waiting = prefs.music && musicNeedsGesture;
-    const active = prefs.music && !waiting;
+    const waiting = prefs.music && !prefs.muted && musicNeedsGesture;
+    const active = prefs.music && !prefs.muted && !waiting;
     quick.setAttribute("aria-pressed", String(active));
     quick.querySelector("use").setAttribute("href", active ? "#i-sound" : "#i-mute");
     $("#sound-prompt").hidden = !waiting;
-    label(quick, waiting ? t().startMusic : active ? t().turnOff : t().turnOn);
+    label(quick, prefs.muted ? (prefs.language==='bn'?'শব্দ চালু করো':'Unmute audio') : waiting ? t().startMusic : active ? t().turnOff : t().turnOn);
   }
   function renderSound() {
     renderMusicButton();
-    for (const key of ["music", "effects", "ambience"]) {
+    for (const key of ["music", "effects", "ambience", "voice"]) {
       const button = $("#" + key + "-switch");
       button.setAttribute("aria-checked", String(prefs[key]));
       button.querySelector("[data-switch-text]").textContent = prefs[key] ? t().on : t().off;
       const level = prefs[key + "Volume"];
-      const range = $("#" + key + "-volume");
+      const range = $(key==="voice"?"#voice-volume-setting":"#" + key + "-volume");
       range.value = String(level);
       range.style.setProperty("--volume", level + "%");
       range.setAttribute("aria-valuetext", number(level) + "%");
       $("#" + key + "-readout").textContent = number(level) + "%";
     }
-    track.volume = prefs.musicVolume / 100;
-    C72Ambience.setVolume(prefs.ambience ? prefs.ambienceVolume : 0);
+    for(const key of ['muted','invertY']){const button=$('#'+key+'-switch');button.setAttribute('aria-checked',String(prefs[key]));button.querySelector('[data-switch-text]').textContent=prefs[key]?t().on:t().off;}
+    $('#quality').value=prefs.quality;$('#key-layout').value=prefs.keyLayout;$('#sensitivity').value=prefs.sensitivity;$('#sensitivity-readout').textContent=number(prefs.sensitivity)+'%';
+    track.muted=prefs.muted;track.volume = prefs.musicVolume / 100;
+    C72Ambience.setVolume(prefs.ambience&&!prefs.muted ? prefs.ambienceVolume : 0);
+    C72Game.setPreferences(prefs);
   }
   function renderFullscreenButton() {
     fullscreenButton.hidden = !document.fullscreenEnabled;
@@ -149,7 +156,7 @@
     showNames();
     renderSound();
     renderFullscreenButton();
-    updateNavigation();
+    updateNavigation();renderProgress();
   }
   function showNotice(text) {
     const message = $("#status-message");
@@ -188,7 +195,7 @@
     syncMusic();
   }
   function chirp(up = false) {
-    if (!prefs.effects || !prefs.effectsVolume || document.hidden) return;
+    if (prefs.muted || !prefs.effects || !prefs.effectsVolume || document.hidden) return;
     const Context = window.AudioContext || window.webkitAudioContext;
     if (!Context) return;
     try {
@@ -243,7 +250,7 @@
     $("#city-view").hidden = next !== "city";
     window.C72Presentation?.show(next);
     nameField.value = prefs.name;
-    updateNavigation();
+    updateNavigation();renderProgress();
     if (next === "city") {
       C72Game.enter({prefs,reset:previous==="menu",sound:chirp});
       return;
@@ -254,12 +261,25 @@
     }
   }
 
-  $("#start-game").addEventListener("click", startGame);
+  document.addEventListener('c72voicevolume',e=>{prefs.voiceVolume=e.detail;save();});
+  function renderProgress(){
+    const state=C72Game.progress(),has=state.encounter>0||state.briefed;
+    $('#start-label').textContent=has?t().continueGame:t().start;$('#new-game').hidden=!has;
+    $('#profile-level').textContent=(prefs.language==='bn'?'লেভেল ':'LEVEL ')+number(Math.min(10,state.level+1));
+    $('#profile-rank').textContent=state.level===10?t().protector:state.level>0?t().helper:t().rookie;
+  }
+  $('#new-game').addEventListener('click',()=>$('#new-run-dialog').showModal());
+  $('#cancel-new-run').addEventListener('click',()=>$('#new-run-dialog').close());
+  $('#confirm-new-run').addEventListener('click',()=>{$('#new-run-dialog').close();C72Game.newRun();renderProgress();startGame();});
+  for(const id of ['quality','key-layout'])$('#'+id).addEventListener('change',()=>{prefs[id==='quality'?'quality':'keyLayout']=$('#'+id).value;save();C72Game.setPreferences(prefs);});
+  for(const key of ['muted','invertY'])$('#'+key+'-switch').addEventListener('click',()=>{prefs[key]=!prefs[key];save();renderSound();});
+    $("#start-game").addEventListener("click", startGame);
   $("#open-settings").addEventListener("click", () => chirp());
   $(".back-link").addEventListener("click", () => chirp());
   $$("[data-language]").forEach(el => el.addEventListener("click", () => changeLanguage(el.dataset.language)));
   $("#music-quick").addEventListener("click", () => {
-    if (prefs.music && musicNeedsGesture) syncMusic();
+    if(prefs.muted){prefs.muted=false;save();renderSound();syncMusic();}
+    else if (prefs.music && musicNeedsGesture) syncMusic();
     else toggleMusic();
   });
   fullscreenButton.addEventListener("click", async () => {
@@ -272,7 +292,7 @@
   });
   document.addEventListener("fullscreenchange", renderFullscreenButton);
   $("#music-switch").addEventListener("click", toggleMusic);
-  for (const key of ["effects","ambience"]) $("#" + key + "-switch").addEventListener("click", () => {
+  for (const key of ["effects","ambience","voice"]) $("#" + key + "-switch").addEventListener("click", () => {
     prefs[key] = !prefs[key];
     save();
     renderSound();
@@ -299,7 +319,7 @@
   });
   $(".skip-link").addEventListener("click", event => { event.preventDefault(); $("#main-content").focus(); });
   document.addEventListener("keydown", event => {
-    if (activeView === "city" || event.altKey || event.ctrlKey || event.metaKey || event.repeat || event.isComposing) return;
+    if ($("#new-run-dialog").open || activeView === "city" || event.altKey || event.ctrlKey || event.metaKey || event.repeat || event.isComposing) return;
     if (event.key === "Escape" && activeView === "settings") {
       commitName();
       location.hash = settingsReturn();

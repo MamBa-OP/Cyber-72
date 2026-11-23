@@ -599,10 +599,21 @@
       if(player||distant===!near)return;
       distant=!near;mesh.geometry=outfit(seed,false,distant,police).geometry;mesh.castShadow=near;
     }
-    let last=-1,airWeight=0,gestureWeight=0,gestureAction="idle",groundLift=0;
+    let last=-1,airWeight=0,gestureWeight=0,gestureAction="idle",groundLift=0,deathStart=null;
     const gait=C72Gait.create({scale:kit.scale,seed});
     const override=new T.Quaternion(),rotation=new T.Euler(),solePoint=V();
     function pose(action,time,speed=0,motion={}) {
+      if(action==='death'){
+        deathStart??=bones.map(b=>b.quaternion.clone());
+        const state=C72DeathMotion.sample(time),weight=smoothstep(clamp(time/.30,0,1));
+        bones[0].position.set(0,.872,0);
+        for(let i=0;i<16;i++){
+          override.setFromEuler(rotation.set(...state.joints[i],'XYZ'));
+          bones[i].quaternion.copy(deathStart[i]).slerp(override,weight);
+        }
+        return;
+      }
+      deathStart=null;
       const fresh=last<0,dt=fresh?1/60:clamp(time-last,0,.10);last=time;
       const locomotion=gait.update(time,action,speed),beat=Math.sin(time*1.65+seed),step=Math.sin(locomotion.phase);
       const walk=locomotion.amount>.05;
@@ -679,7 +690,24 @@
       }
     }
     pose("idle",0);gait.reset();last=-1;groundLift=0;
-    return {root,pose,setDetail,reset(){last=-1;airWeight=gestureWeight=groundLift=0;gestureAction="idle";gait.reset();}};
+    // Keep the collapsing body above the actual uneven pavement, including clothes.
+    const contactPoint=V();
+    function collapse(state,origin,heading,ground){
+      root.rotation.set(state.pitch,heading,state.roll,'YXZ');
+      const hip=V(0,.872,0).multiply(mesh.scale).applyQuaternion(root.quaternion);
+      const drift=V(state.x,state.height*kit.scale,state.z).applyAxisAngle(V(0,1,0),heading);
+      root.position.copy(origin).add(drift).sub(hip);
+      root.updateMatrixWorld(true);mesh.skeleton.update();
+      let correction=-Infinity;
+      for(let i=0;i<mesh.geometry.attributes.position.count;i++){
+        mesh.getVertexPosition(i,contactPoint).applyMatrix4(mesh.matrixWorld);
+        correction=Math.max(correction,ground(contactPoint.x,contactPoint.z)+.006-contactPoint.y);
+      }
+      // Height is driven by the hip until contact; the final pose settles onto the road.
+      root.position.y+=state.roll>1.30?correction:Math.max(0,correction);
+      root.updateMatrixWorld(true);
+    }
+    return {root,pose,setDetail,collapse,reset(){deathStart=null;last=-1;airWeight=gestureWeight=groundLift=0;gestureAction="idle";gait.reset();}};
   }
   const seatedHeads=new Map();
   function seatedHead(seed,skinTone){
